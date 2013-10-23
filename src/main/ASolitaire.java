@@ -11,9 +11,10 @@ import controleur.CSolitaire;
 import controleur.CUsine;
 import controleur.Interface.ICSolitaire;
 import solitaire.application.Carte;
+import solitaire.application.Solitaire;
 import solitaire.application.Usine;
 
-public class Solitaire {
+public class ASolitaire {
 
 	public static void main(String[] args) {
 		
@@ -27,9 +28,11 @@ public class Solitaire {
 		frame.getContentPane().add(c.getPresentation());
 		frame.setVisible(true);*/
 		
-		Usine usine = new CUsine();
-		ICSolitaire solitaire = new CSolitaire("", usine);
+		Usine usine = new Usine();
+		Solitaire solitaire = new Solitaire("", usine);
+		solitaire.initialiser();
 		solitaire.run();
+		
 	}
 
 }
