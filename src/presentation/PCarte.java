@@ -69,7 +69,7 @@ public class PCarte extends JPanel {
        initialiser l'image du dos et les dimensions d'une PCarte
     */
     static {
-    iconeDos = new ImageIcon(ClassLoader.getSystemResource("1C.gif")) ;
+    iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.jpg")) ;
 	largeur = iconeDos.getIconWidth () + 4;
 	hauteur = iconeDos.getIconHeight () + 4;
     }
