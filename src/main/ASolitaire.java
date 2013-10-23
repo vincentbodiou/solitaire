@@ -11,7 +11,10 @@ import controleur.CSolitaire;
 import controleur.CUsine;
 import controleur.Interface.ICSolitaire;
 import solitaire.application.Carte;
+import solitaire.application.DoubleTas;
+import solitaire.application.Sabot;
 import solitaire.application.Solitaire;
+import solitaire.application.Tas;
 import solitaire.application.Usine;
 
 public class ASolitaire {
@@ -32,6 +35,7 @@ public class ASolitaire {
 		Solitaire solitaire = new Solitaire("", usine);
 		solitaire.initialiser();
 		solitaire.run();
+		Sabot s = new Sabot("", usine);		
 		
 	}
 

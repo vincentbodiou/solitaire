@@ -1,6 +1,19 @@
 package presentation;
 
-public class PSabot {
+import javax.swing.JPanel;
+
+public class PSabot extends JPanel{
+	
+	private PTasDeCarte reserve;
+	private PTasDeCarte tasVisible;
+	
+	
+	public PSabot(PTasDeCarte reserve, PTasDeCarte tasVisible)
+	{
+		this.reserve=reserve;
+		this.tasVisible=tasVisible;
+		
+	}
 	/* 
 	RetournerCarteListener rcl;
 	RetournerSabotListener rsl;
