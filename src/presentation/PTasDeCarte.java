@@ -57,7 +57,7 @@ public class PTasDeCarte extends JPanel
 		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par défaut
 		f.getContentPane ().setBackground(new Color(143, 143, 195)); // violet pâle
 	
-		PTasDeCarte tasDeCarte = new PTasDeCarte(Decalage.SANS_DECALAGE);
+		PTasDeCarte tasDeCarte = new PTasDeCarte(Decalage.DROITE);
 		tasDeCarte.setVisible(true);
 				
 		// une carte visible
@@ -72,7 +72,9 @@ public class PTasDeCarte extends JPanel
 		pc = new PCarte("1D");
 		pc.setFaceVisible(true);
 		tasDeCarte.empiler(pc);	
-		f.getContentPane ().add(tasDeCarte) ;	
+		f.getContentPane ().add(tasDeCarte) ;
+		tasDeCarte.empiler(new PCarte("1C"));
+		tasDeCarte.empiler(new PCarte("1D"));
 		
 		f.pack () ;		// dimensionner le cadre
 		f.setLocation(200,100);	// le positionner
