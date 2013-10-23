@@ -10,12 +10,6 @@ import javax.swing.WindowConstants;
 @SuppressWarnings("serial")
 public class PTasDeCarte extends JPanel
 {
-
-	private static int PAS = PCarte.largeur * 30 / 100;
-
-	private int dx = 0;
-	private int dy = 0;
-
 	private Decalage decalage;
 
 	public PTasDeCarte(Decalage decalage)
@@ -41,8 +35,9 @@ public class PTasDeCarte extends JPanel
 
 	public void depiler(PCarte carte)
 	{
-		this.setSize(this.getWidth() - decalage.getDx(), this.getHeight() - decalage.getDy());
 		remove(carte);
+		this.setSize(this.getWidth() - decalage.getDx(), this.getHeight() - decalage.getDy());
+		setPreferredSize(getSize());
 		repaint();
 	}
 
@@ -60,21 +55,29 @@ public class PTasDeCarte extends JPanel
 		PTasDeCarte tasDeCarte = new PTasDeCarte(Decalage.DROITE);
 		tasDeCarte.setVisible(true);
 				
-		// une carte visible
-		PCarte pc = new PCarte ("1C");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
-			
-		pc = new PCarte("1D");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
+		// empile une carte
+		PCarte pc1 = new PCarte ("1C");
+		pc1.setFaceVisible(true);
+		tasDeCarte.empiler(pc1);
 		
-		pc = new PCarte("1D");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);	
-		f.getContentPane ().add(tasDeCarte) ;
-		tasDeCarte.empiler(new PCarte("1C"));
-		tasDeCarte.empiler(new PCarte("1D"));
+		//puis une autre...
+		PCarte pc2 = new PCarte("1D");
+		pc2.setFaceVisible(true);
+		tasDeCarte.empiler(pc2);
+		
+		//puis une autre...
+		PCarte pc3 = new PCarte("10H");
+		pc3.setFaceVisible(true);
+		tasDeCarte.empiler(pc3);
+		
+		PCarte pc4 = new PCarte("4S");
+		pc4.setFaceVisible(true);
+		tasDeCarte.empiler(pc4);
+		
+		tasDeCarte.depiler(pc4);
+		
+		f.getContentPane ().add(tasDeCarte) ;	
+		
 		
 		f.pack () ;		// dimensionner le cadre
 		f.setLocation(200,100);	// le positionner

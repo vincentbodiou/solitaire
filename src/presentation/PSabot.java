@@ -7,16 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+@SuppressWarnings("serial")
 public class PSabot extends JPanel
 {
-
-	private PTasDeCarte reserve;
+	private PTasDeCarte tasReserve;
 	private PTasDeCarte tasVisible;
 	private static final int MARGE = 10;
 
 	public PSabot(PTasDeCarte reserve, PTasDeCarte tasVisible)
 	{
-		this.reserve = reserve;
+		this.tasReserve = reserve;
 		this.tasVisible = tasVisible;
 		setLayout(null);
 
@@ -57,39 +57,39 @@ public class PSabot extends JPanel
 	public void depilerTasVisible(PCarte carte)
 	{
 		tasVisible.depiler(carte);
+		setSize(MARGE * 3 + tasVisible.getWidth() + tasReserve.getWidth(), getHeight());
+		setPreferredSize(getSize());
 		repaint();
 	}
 
 	public void depilerReserve(PCarte carte)
 	{
-		reserve.depiler(carte);
-		setSize(MARGE * 3 + tasVisible.getWidth() + reserve.getWidth(), getHeight());
-		setPreferredSize(getSize());
+		tasReserve.depiler(carte);
 		repaint();
 	}
 
 	public void empilerTasVisible(PCarte carte)
 	{
 		tasVisible.empiler(carte);
-		setSize(MARGE * 3 + tasVisible.getWidth() + reserve.getWidth(), getHeight());
+		setSize(MARGE * 3 + tasVisible.getWidth() + tasReserve.getWidth(), getHeight());
 		setPreferredSize(getSize());
 		repaint();
 	}
 
 	public void empilerReserve(PCarte carte)
 	{
-		reserve.empiler(carte);
+		tasReserve.empiler(carte);
 		repaint();
 	}
 
 	public PTasDeCarte getReserve()
 	{
-		return reserve;
+		return tasReserve;
 	}
 
 	public void setReserve(PTasDeCarte reserve)
 	{
-		this.reserve = reserve;
+		this.tasReserve = reserve;
 	}
 
 	public PTasDeCarte getTasVisible()
@@ -117,52 +117,52 @@ public class PSabot extends JPanel
 		JFrame f = new JFrame("Test PCarte");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par défaut
-		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet
-																	// pâle
+		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet																	// pâle
 
-		PTasDeCarte tasDeCarte = new PTasDeCarte(Decalage.DROITE);
-		tasDeCarte.setVisible(true);
+		PTasDeCarte tasVisible = new PTasDeCarte(Decalage.DROITE);
+		tasVisible.setVisible(true);
 
-		// une carte visible
-		PCarte pc = new PCarte("1C");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
+		// init du tas de carte visible 
+		PCarte carteVisible1 = new PCarte("1C");
+		carteVisible1.setFaceVisible(true);
+		tasVisible.empiler(carteVisible1);
 
-		pc = new PCarte("1C");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
+		PCarte carteVisible2 = new PCarte("1C");
+		carteVisible2.setFaceVisible(true);
+		tasVisible.empiler(carteVisible2);
 
-		pc = new PCarte("1D");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
+		PCarte carteVisible3 = new PCarte("1D");
+		carteVisible3.setFaceVisible(true);
+		tasVisible.empiler(carteVisible3);
 
-		pc = new PCarte("1D");
-		pc.setFaceVisible(true);
-		tasDeCarte.empiler(pc);
+		PCarte carteVisible4 = new PCarte("1D");
+		carteVisible4.setFaceVisible(true);
+		tasVisible.empiler(carteVisible4);
 
-		PTasDeCarte tasDeCarte2 = new PTasDeCarte(Decalage.SANS_DECALAGE);
-		tasDeCarte2.setVisible(true);
+		// init du tas de carte de la reserve 
+		PTasDeCarte reserve = new PTasDeCarte(Decalage.SANS_DECALAGE);
+		reserve.setVisible(true);
 
-		// une carte visible
-		PCarte pc2 = new PCarte("1C");
-		pc2.setFaceVisible(true);
-		tasDeCarte2.empiler(pc2);
+		PCarte carteReserve1 = new PCarte("1C");
+		carteReserve1.setFaceVisible(true);
+		reserve.empiler(carteReserve1);
 
-		pc2 = new PCarte("1C");
-		pc2.setFaceVisible(true);
-		tasDeCarte2.empiler(pc2);
+		PCarte carteReserve2 = new PCarte("1C");
+		carteReserve2.setFaceVisible(true);
+		reserve.empiler(carteReserve2);
 
-		pc2 = new PCarte("1D");
-		pc2.setFaceVisible(true);
-		tasDeCarte2.empiler(pc2);
+		PCarte carteReserve3 = new PCarte("1D");
+		carteReserve3.setFaceVisible(true);
+		reserve.empiler(carteReserve3);
+		
+		//ajout dans le sabot
+		PSabot sabot = new PSabot(reserve, tasVisible);
 
-		pc2 = new PCarte("1D");
-		pc.setFaceVisible(true);
-		tasDeCarte2.empiler(pc2);
-
-		PSabot sabot = new PSabot(tasDeCarte2, tasDeCarte);
-
-		sabot.depilerTasVisible(pc);
+		//sabot.empilerTasVisible(new PCarte("10C"));
+		sabot.depilerTasVisible(carteVisible4);
+		
+		//sabot.depilerReserve(carteReserve3);
+		//sabot.empilerReserve(new PCarte("2H"));
 
 		f.getContentPane().add(sabot);
 		f.pack(); // dimensionner le cadre
