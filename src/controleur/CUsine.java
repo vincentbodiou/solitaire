@@ -8,4 +8,9 @@ public class CUsine extends Usine{
 	{
 		super();
 	}
+	
+	public CCarte newCarte(int valeur, int couleur){
+		return new CCarte(valeur,couleur);
+	}
+	
 }

@@ -9,9 +9,9 @@ public class CTasDeCarte extends TasDeCartes {
 
 	private PTasDeCarte p;
 	
-	public CTasDeCarte(String nom, Usine usine) {
+	public CTasDeCarte(String nom, CUsine usine) {
 		super(nom, usine);
-		p = new PTasDeCarte(this);
+		p = new PTasDeCarte();
 	}
 
 	// Tas de carte 
@@ -28,22 +28,22 @@ public class CTasDeCarte extends TasDeCartes {
 		return p;
 	}
 
-	public void empiler(Carte carte) {
+	public void empiler(CCarte carte) {
 		if(isEmpilable(carte)) {
 			super.empiler(carte);
 			try {
 				if(carte==getSommet()) { 
-					p.empiler((CCarte)carte).getPresentation();
+					p.empiler(carte.getPresentation());
 				}
 			} catch (Exception e) {
 				e.printStackTrace(); //tas de carte vide
 			}
 		}
 	}
-
+	
 	public void depiler() throws Exception {
-		Carte carte = getSommet();
+		CCarte carte = (CCarte)getSommet();
 		super.depiler();
-		p.depiler((CCarte)carte).getPresentation();
+		p.depiler(carte.getPresentation());
 	}
 }

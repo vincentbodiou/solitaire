@@ -15,7 +15,7 @@ public class Solitaire {
 
 	public static void main(String[] args) {
 		
-		/*JFrame frame = new JFrame();
+		JFrame frame = new JFrame();
 		
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -23,11 +23,11 @@ public class Solitaire {
 		
 		CCarte c=new CCarte(1,1);
 		frame.getContentPane().add(c.getPresentation());
-		frame.setVisible(true);*/
+		frame.setVisible(true);
 		
-		Usine usine = CUsine();
-		ICSolitaire solitaire = new CSolitaire("", usine);
-		solitaire.run();
+		//Usine usine = CUsine();
+		//ICSolitaire solitaire = new CSolitaire("", usine);
+		//solitaire.run();
 	}
 
 }
