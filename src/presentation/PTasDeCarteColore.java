@@ -1,4 +1,4 @@
-package solitaire.presentation;
+package presentation;
 
 public class PTasDeCarteColore {
 

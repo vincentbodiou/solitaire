@@ -1,4 +1,4 @@
-package solitaire.controleur;
+package controleur;
 
 public class CTasDeCarteAlterne {
 	// Tas de carte 

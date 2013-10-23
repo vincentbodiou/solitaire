@@ -1,10 +1,6 @@
-package solitaire.controleur;
+package controleur;
 
-import solitaire.application.TasDeCartes;
-import solitaire.presentation.PTasDeCarte;
-
-public class CTasDeCarte extends TasDeCartes {
-
+public class CTasDeCarteColore {
 	// Tas de carte 
 
 	// 3 methode a redefinir :
@@ -14,11 +10,10 @@ public class CTasDeCarte extends TasDeCartes {
 
 	// 1 methode a faire :
 	// getPresentation
-	PTasDeCarte p;
-	
-	CTasDeCartes(String nom, CUsine u ) {
+/*
+	CTasDeCarteColore(String nom, CUsine u ) {
 		super(nom, u);
-		p = new PTasDeCarte(this);
+		p = new PTasDeCarteColore(this);
 	}
 
 	PTasDeCarte getPresentation() {
@@ -38,5 +33,5 @@ public class CTasDeCarte extends TasDeCartes {
 		Carte carte = getSommet();
 		super.depiler();
 		presentation.depiler((CCarte)carte).getPresentation());
-	}
+	}*/
 }

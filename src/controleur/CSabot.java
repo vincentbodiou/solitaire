@@ -1,6 +1,6 @@
-package solitaire.controleur;
+package controleur;
 
-import solitaire.presentation.PSabot;
+import presentation.PSabot;
 
 public class CSabot {
 

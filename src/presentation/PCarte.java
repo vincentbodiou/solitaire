@@ -1,4 +1,4 @@
-package solitaire.presentation ;
+package presentation ;
 
 //import solitaire.controle.* ;
 import java.awt.* ;
@@ -53,8 +53,8 @@ public class PCarte extends JPanel {
      * @param faceVisible : vrai si la face est visible, faux sinon
      */
     public void setFaceVisible (boolean faceVisible) {
-	face.setVisible(faceVisible);
-	dos.setVisible(!faceVisible);
+		face.setVisible(faceVisible);
+		dos.setVisible(!faceVisible);
     }
 
     //public final CCarte getControle () {

@@ -1,4 +1,4 @@
-package solitaire.controleur;
+package controleur;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -6,9 +6,9 @@ import java.awt.FlowLayout;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import presentation.PCarte;
 import solitaire.application.Carte;
 import solitaire.application.Solitaire;
-import solitaire.presentation.PCarte;
 
 public class CCarte extends Carte{
 
