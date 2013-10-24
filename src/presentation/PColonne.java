@@ -14,7 +14,7 @@ public class PColonne extends JPanel
     private PTasDeCarte tasCache;
     private static final int MARGE = 10;
     private static final int HAUTEUR = 400;
-    
+    private static int LARGEUR=PCarte.largeur+2*MARGE;
     
     public PColonne( PTasDeCarte tasVisible, PTasDeCarte tasCache  )
     {
@@ -28,7 +28,7 @@ public class PColonne extends JPanel
         add(tasCache);
         add(tasVisible,0);
         
-        setSize(tasCache.getWidth() + MARGE *2 , HAUTEUR);
+        setSize(LARGEUR , HAUTEUR);
         setPreferredSize(getSize());
         setVisible(true);
         setBackground(Color.cyan);
@@ -117,4 +117,11 @@ public class PColonne extends JPanel
         f.setLocation(200, 100); // le positionner
         f.setVisible(true); // et le rendre visible
     } // main
+
+
+    public static int getLARGEUR()
+    {
+        return LARGEUR;
+    }
+
 }
