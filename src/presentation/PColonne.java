@@ -23,8 +23,7 @@ public class PColonne extends JPanel
         setLayout( null );
         
         tasCache.setLocation( MARGE, MARGE );
-        Decalage decalage = Decalage.BAS;
-        tasVisible.setLocation( MARGE , tasCache.getSize().height-(PCarte.hauteur-decalage.getDy()));
+        tasVisible.setLocation( MARGE , tasCache.getSize().height-(PCarte.hauteur-Decalage.BAS.getDy()));
         
         add(tasCache);
         add(tasVisible,0);
@@ -78,19 +77,19 @@ public class PColonne extends JPanel
         tasVisible.setVisible(true);
 
         // init du tas de carte visible 
-        PCarte carteVisible1 = new PCarte("1C");
+        PCarte carteVisible1 = new PCarte("5C");
         carteVisible1.setFaceVisible(true);
         tasVisible.empiler(carteVisible1);
 
-        PCarte carteVisible2 = new PCarte("1C");
+        PCarte carteVisible2 = new PCarte("4D");
         carteVisible2.setFaceVisible(true);
         tasVisible.empiler(carteVisible2);
 
-        PCarte carteVisible3 = new PCarte("1D");
+        PCarte carteVisible3 = new PCarte("3C");
         carteVisible3.setFaceVisible(true);
         tasVisible.empiler(carteVisible3);
 
-        PCarte carteVisible4 = new PCarte("1D");
+        PCarte carteVisible4 = new PCarte("2D");
         carteVisible4.setFaceVisible(true);
         tasVisible.empiler(carteVisible4);
 
