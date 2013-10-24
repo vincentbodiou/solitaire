@@ -114,7 +114,7 @@ public class PSabot extends JPanel
 	 */
 	public static void main(String args[])
 	{
-		JFrame f = new JFrame("Test PCarte");
+		JFrame f = new JFrame("Test PSabot");
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par défaut
 		f.getContentPane().setBackground(new Color(143, 143, 195)); // violet																	// pâle

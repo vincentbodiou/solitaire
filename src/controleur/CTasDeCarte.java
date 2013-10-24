@@ -11,7 +11,7 @@ public class CTasDeCarte extends TasDeCartes {
 	
 	public CTasDeCarte(String nom, CUsine usine) {
 		super(nom, usine);
-		p = new PTasDeCarte();
+		//p = new PTasDeCarte();
 	}
 
 	// Tas de carte 
