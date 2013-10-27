@@ -44,8 +44,9 @@ public class P7Colonne extends JPanel
         
         setSize(LARGEUR,HAUTEUR);
         setPreferredSize(getSize());
+        setBackground(Color.white); 
         setVisible(true);
-        setBackground(Color.white);       
+              
     }
 
     

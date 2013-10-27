@@ -50,7 +50,7 @@ public class PTasDeCarte extends JPanel
 		JFrame f = new JFrame ("Test PCarte") ;
 		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		f.setLayout(new FlowLayout()); // au lieu de BorderLayout par défaut
-		f.getContentPane ().setBackground(new Color(143, 143, 195)); // violet pâle
+		f.getContentPane ().setBackground(Color.gray); // violet pâle
 	
 		PTasDeCarte tasDeCarte = new PTasDeCarte(Decalage.DROITE);
 		tasDeCarte.setVisible(true);

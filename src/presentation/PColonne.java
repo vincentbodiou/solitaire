@@ -30,9 +30,9 @@ public class PColonne extends JPanel
         
         setSize(LARGEUR , HAUTEUR);
         setPreferredSize(getSize());
+        
+        setBackground(Color.red);
         setVisible(true);
-        setBackground(Color.cyan);
-
         repaint();
         
     }

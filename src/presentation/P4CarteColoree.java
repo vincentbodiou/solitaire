@@ -16,9 +16,9 @@ public class P4CarteColoree extends JPanel
 {
     private static int NB_TASDECARTES = 4;
 
-    private int HAUTEUR = 100;
+    private int HAUTEUR = 800;
 
-    private final static int LARGEUR = 800;
+    private final static int LARGEUR = 100;
 
     private List<PTasDeCarte> lTasDeCartes;
 
@@ -27,7 +27,7 @@ public class P4CarteColoree extends JPanel
         this.lTasDeCartes = lTasDeCartes;
         int i = 0;
         setLayout( null );
-        GridLayout GridColonnes = new GridLayout( 0, NB_TASDECARTES );
+        GridLayout GridColonnes = new GridLayout( NB_TASDECARTES,0 );
         setLayout( GridColonnes );
 
         Iterator<PTasDeCarte> it = lTasDeCartes.iterator();
@@ -39,7 +39,7 @@ public class P4CarteColoree extends JPanel
             i++;
         }
 
-        setSize( LARGEUR, HAUTEUR );
+        setSize( getMinimumSize() );
         setPreferredSize( getSize() );
         setVisible( true );
         setBackground( Color.white );
