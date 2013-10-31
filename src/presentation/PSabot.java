@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import IPresentation.IPSabot;
-import IPresentation.IPTasDeCarte;
+import presentation.Interface.IPSabot;
+import presentation.Interface.IPTasDeCarte;
 
 @SuppressWarnings("serial")
 public class PSabot extends JPanel implements IPSabot

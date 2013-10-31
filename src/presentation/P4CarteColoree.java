@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import IPresentation.IP4CarteColoree;
+import presentation.Interface.IP4CarteColoree;
 
 @SuppressWarnings( "serial" )
 public class P4CarteColoree extends JPanel implements IP4CarteColoree

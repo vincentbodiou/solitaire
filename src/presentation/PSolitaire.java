@@ -12,9 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import IPresentation.IP4CarteColoree;
-import IPresentation.IP7Colonnes;
-import IPresentation.IPSabot;
+import presentation.Interface.IP4CarteColoree;
+import presentation.Interface.IP7Colonnes;
+import presentation.Interface.IPSabot;
 
 @SuppressWarnings( "serial" )
 public class PSolitaire extends JFrame

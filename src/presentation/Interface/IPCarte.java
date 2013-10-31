@@ -1,4 +1,4 @@
-package IPresentation;
+package presentation.Interface;
 
 import javax.swing.ImageIcon;
 

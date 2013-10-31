@@ -7,7 +7,7 @@ import java.net.URL;
 
 import javax.swing.* ;
 
-import IPresentation.IPCarte;
+import presentation.Interface.IPCarte;
 
 /**
  * Composant Présentation d'une carte

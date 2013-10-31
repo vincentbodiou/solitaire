@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import IPresentation.IPTasDeCarte;
+import presentation.Interface.IPTasDeCarte;
 
 @SuppressWarnings( "serial" )
 public class PColonne extends JPanel implements IPColonne

@@ -1,6 +1,6 @@
 package controleur;
 
-import IPresentation.IPTasDeCarte;
+import presentation.Interface.IPTasDeCarte;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;

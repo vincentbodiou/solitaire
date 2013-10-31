@@ -12,7 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import IPresentation.IP7Colonnes;
+import presentation.Interface.IP7Colonnes;
 
 @SuppressWarnings( "serial" )
 public class P7Colonne extends JPanel implements IP7Colonnes

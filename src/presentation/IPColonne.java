@@ -1,6 +1,6 @@
 package presentation;
 
-import IPresentation.IPTasDeCarte;
+import presentation.Interface.IPTasDeCarte;
 
 public interface IPColonne
 {
