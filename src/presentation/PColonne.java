@@ -7,11 +7,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import IPresentation.IPTasDeCarte;
+
 @SuppressWarnings( "serial" )
-public class PColonne extends JPanel
+public class PColonne extends JPanel implements IPColonne
 {
-    private PTasDeCarte tasVisible;
-    private PTasDeCarte tasCache;
+    private IPTasDeCarte tasVisible;
+    private IPTasDeCarte tasCache;
     private static final int MARGE = 10;
     private static final int HAUTEUR = 400;
     private static int LARGEUR=PCarte.largeur+2*MARGE;
@@ -38,25 +40,41 @@ public class PColonne extends JPanel
     }
 
 
-    public PTasDeCarte getTasCache()
+    /* (non-Javadoc)
+     * @see presentation.IPColonne#getTasCache()
+     */
+    @Override
+    public IPTasDeCarte getTasCache()
     {
         return tasCache;
     }
 
 
-    public void setTasCache( PTasDeCarte tasCache )
+    /* (non-Javadoc)
+     * @see presentation.IPColonne#setTasCache(IPresentation.IPTasDeCarte)
+     */
+    @Override
+    public void setTasCache( IPTasDeCarte tasCache )
     {
         this.tasCache = tasCache;
     }
 
 
-    public PTasDeCarte getTasVisible()
+    /* (non-Javadoc)
+     * @see presentation.IPColonne#getTasVisible()
+     */
+    @Override
+    public IPTasDeCarte getTasVisible()
     {
         return tasVisible;
     }
 
 
-    public void setTasVisible( PTasDeCarte tasVisible )
+    /* (non-Javadoc)
+     * @see presentation.IPColonne#setTasVisible(IPresentation.IPTasDeCarte)
+     */
+    @Override
+    public void setTasVisible( IPTasDeCarte tasVisible )
     {
         this.tasVisible = tasVisible;
     }

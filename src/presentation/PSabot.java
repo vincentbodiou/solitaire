@@ -7,8 +7,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import IPresentation.IPSabot;
+import IPresentation.IPTasDeCarte;
+
 @SuppressWarnings("serial")
-public class PSabot extends JPanel
+public class PSabot extends JPanel implements IPSabot
 {
 	private PTasDeCarte tasReserve;
 	private PTasDeCarte tasVisible;
@@ -54,7 +57,11 @@ public class PSabot extends JPanel
 	 * void activerRetournerSabot() { cache.setMouseListener(rsl); }
 	 */
 
-	public void depilerTasVisible(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#depilerTasVisible(presentation.PCarte)
+     */
+	@Override
+    public void depilerTasVisible(PCarte carte)
 	{
 		tasVisible.depiler(carte);
 		setSize(MARGE * 3 + tasVisible.getWidth() + tasReserve.getWidth(), getHeight());
@@ -62,13 +69,21 @@ public class PSabot extends JPanel
 		repaint();
 	}
 
-	public void depilerReserve(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#depilerReserve(presentation.PCarte)
+     */
+	@Override
+    public void depilerReserve(PCarte carte)
 	{
 		tasReserve.depiler(carte);
 		repaint();
 	}
 
-	public void empilerTasVisible(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#empilerTasVisible(presentation.PCarte)
+     */
+	@Override
+    public void empilerTasVisible(PCarte carte)
 	{
 		tasVisible.empiler(carte);
 		setSize(MARGE * 3 + tasVisible.getWidth() + tasReserve.getWidth(), getHeight());
@@ -76,28 +91,48 @@ public class PSabot extends JPanel
 		repaint();
 	}
 
-	public void empilerReserve(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#empilerReserve(presentation.PCarte)
+     */
+	@Override
+    public void empilerReserve(PCarte carte)
 	{
 		tasReserve.empiler(carte);
 		repaint();
 	}
 
-	public PTasDeCarte getReserve()
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#getReserve()
+     */
+	@Override
+    public IPTasDeCarte getReserve()
 	{
 		return tasReserve;
 	}
 
-	public void setReserve(PTasDeCarte reserve)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#setReserve(presentation.PTasDeCarte)
+     */
+	@Override
+    public void setReserve(PTasDeCarte reserve)
 	{
 		this.tasReserve = reserve;
 	}
 
-	public PTasDeCarte getTasVisible()
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#getTasVisible()
+     */
+	@Override
+    public IPTasDeCarte getTasVisible()
 	{
 		return tasVisible;
 	}
 
-	public void setTasVisible(PTasDeCarte tasVisible)
+	/* (non-Javadoc)
+     * @see presentation.IPSabot#setTasVisible(presentation.PTasDeCarte)
+     */
+	@Override
+    public void setTasVisible(PTasDeCarte tasVisible)
 	{
 		this.tasVisible = tasVisible;
 	}

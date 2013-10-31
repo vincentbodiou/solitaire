@@ -12,8 +12,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import IPresentation.IP7Colonnes;
+
 @SuppressWarnings( "serial" )
-public class P7Colonne extends JPanel
+public class P7Colonne extends JPanel implements IP7Colonnes
 {
     private List<PColonne> colonnes;
 
@@ -29,11 +31,10 @@ public class P7Colonne extends JPanel
     {
         int i = 0;
         setLayout( null );
-        GridLayout GridColonnes = new GridLayout(0,NB_COLONNE);
+        GridLayout GridColonnes = new GridLayout( 0, NB_COLONNE );
         setLayout( GridColonnes );
         this.colonnes = colonnes;
         Iterator<PColonne> it = colonnes.iterator();
-        
 
         while ( it.hasNext() && i < NB_COLONNE )
         {
@@ -41,15 +42,14 @@ public class P7Colonne extends JPanel
             add( colonne );
             i++;
         }
-        
-        setSize(LARGEUR,HAUTEUR);
-        setPreferredSize(getSize());
-        setBackground(Color.white); 
-        setVisible(true);
-              
+
+        setSize( LARGEUR, HAUTEUR );
+        setPreferredSize( getSize() );
+        setBackground( Color.white );
+        setVisible( true );
+
     }
 
-    
     /**
      * programme de test : à déplacer dans une classe dédiée aux tests
      * 
@@ -58,7 +58,7 @@ public class P7Colonne extends JPanel
     public static void main( String args[] )
     {
         int nb_colonnes = 7;
-        
+
         JFrame f = new JFrame( "Test P7Colonne" );
         f.setDefaultCloseOperation( WindowConstants.EXIT_ON_CLOSE );
         f.setLayout( new FlowLayout() ); // au lieu de BorderLayout par défaut

@@ -1,13 +1,13 @@
 package controleur;
 
-import presentation.PTasDeCarte;
+import IPresentation.IPTasDeCarte;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
 
 public class CTasDeCarte extends TasDeCartes {
 
-	private PTasDeCarte p;
+	private IPTasDeCarte p;
 	
 	public CTasDeCarte(String nom, CUsine usine) {
 		super(nom, usine);
@@ -24,7 +24,7 @@ public class CTasDeCarte extends TasDeCartes {
 	// 1 methode a faire :
 	// getPresentation
 
-	PTasDeCarte getPresentation() {
+	IPTasDeCarte getPresentation() {
 		return p;
 	}
 

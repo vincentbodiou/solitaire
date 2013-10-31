@@ -7,8 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import IPresentation.IPTasDeCarte;
+
 @SuppressWarnings("serial")
-public class PTasDeCarte extends JPanel
+public class PTasDeCarte extends JPanel implements IPTasDeCarte
 {
 	private Decalage decalage;
 
@@ -23,7 +25,11 @@ public class PTasDeCarte extends JPanel
 		repaint();
 	}
 
-	public void empiler(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPTasDeCarte#empiler(presentation.PCarte)
+     */
+	@Override
+    public void empiler(PCarte carte)
 	{
 		this.setSize(carte.getWidth() + this.getComponentCount() * decalage.getDx(),
 				carte.getHeight() + this.getComponentCount() * decalage.getDy());
@@ -33,7 +39,11 @@ public class PTasDeCarte extends JPanel
 		repaint();
 	}
 
-	public void depiler(PCarte carte)
+	/* (non-Javadoc)
+     * @see presentation.IPTasDeCarte#depiler(presentation.PCarte)
+     */
+	@Override
+    public void depiler(PCarte carte)
 	{
 		remove(carte);
 		this.setSize(this.getWidth() - decalage.getDx(), this.getHeight() - decalage.getDy());

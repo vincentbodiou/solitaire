@@ -12,15 +12,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
+import IPresentation.IP4CarteColoree;
+import IPresentation.IP7Colonnes;
+import IPresentation.IPSabot;
+
 @SuppressWarnings( "serial" )
 public class PSolitaire extends JFrame
 {
 
-    private PSabot pSabot;
+    private IPSabot pSabot;
 
-    private P4CarteColoree p4carteColoree;
+    private IP4CarteColoree p4carteColoree;
 
-    private P7Colonne p7Colonne;
+    private IP7Colonnes p7Colonne;
 
     public PSolitaire( PSabot pSabot, P4CarteColoree p4carteColoree, P7Colonne p7Colonne )
     {

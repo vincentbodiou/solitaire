@@ -7,10 +7,12 @@ import java.net.URL;
 
 import javax.swing.* ;
 
+import IPresentation.IPCarte;
+
 /**
  * Composant Présentation d'une carte
  */
-public class PCarte extends JPanel {
+public class PCarte extends JPanel implements IPCarte {
 
     //protected CCarte controle ;		// contrôleur associé
     protected JLabel face, dos ;
@@ -48,10 +50,10 @@ public class PCarte extends JPanel {
 	setFaceVisible(false);
     } // constructeur
 
-    /**
-     * changer la visibilité de la carte
-     * @param faceVisible : vrai si la face est visible, faux sinon
+    /* (non-Javadoc)
+     * @see presentation.IPCarte#setFaceVisible(boolean)
      */
+    @Override
     public void setFaceVisible (boolean faceVisible) {
 		face.setVisible(faceVisible);
 		dos.setVisible(!faceVisible);
@@ -61,6 +63,10 @@ public class PCarte extends JPanel {
     //return (controle) ;
     //}
 
+    /* (non-Javadoc)
+     * @see presentation.IPCarte#getIcone()
+     */
+    @Override
     public ImageIcon getIcone () {
 	return icone ;
     }
