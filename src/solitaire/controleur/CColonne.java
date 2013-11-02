@@ -101,7 +101,7 @@ public class CColonne extends Colonne
         tas.empiler( c4 );
 
         c.setReserve( tas );
-
+        
         try
         {            
             c.retournerCarte();

@@ -5,18 +5,21 @@ import solitaire.application.Colonne;
 import solitaire.application.Sabot;
 import solitaire.application.TasDeCartes;
 import solitaire.application.TasDeCartesAlternees;
+import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
-import solitaire.controleur.CCarte;
-import solitaire.controleur.CColonne;
-import solitaire.controleur.CSabot;
-import solitaire.controleur.CTasDeCarte;
-import solitaire.controleur.CTasDeCarteAlterne;
+
+import solitaire.controleur.*;
 
 public class CUsine extends Usine {
     
     public CUsine() 
     {
         super();
+    }
+    
+    public TasDeCartesColorees newTasDeCarteColorees(String name, int couleur, Usine u)
+    {
+        return new CTasDeCarteColorees(name, couleur, u);
     }
     
 	public Carte newCarte(int v, int c) {
