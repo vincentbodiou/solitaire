@@ -1,6 +1,8 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 
@@ -18,16 +20,18 @@ public class PColonne extends JPanel
     public PColonne( CColonne c )
     {
         this.setControlleur( c );
-        setLayout( null );
+        setLayout( new GridLayout( 0, 1 ) );
         tasVisible = (PTasDeCarteAlterne) controlleur.getTasVisible().getPresentation();
         tasCachee = (PTasDeCarte) controlleur.getTasCachee().getPresentation();
-        add(tasVisible);
         add(tasCachee);
-        setSize( PCarte.largeur, PCarte.hauteur );
+        add(tasVisible);
         setPreferredSize( getSize() );
-        
-        setBackground( Color.yellow );
-    }
+        setSize(getSize());
+        setVisible( true );
+        setBackground( Color.red );
+    }  
+    
+    
 
     public CColonne getControlleur()
     {

@@ -39,7 +39,7 @@ public class PCarte extends JPanel {
 
 	// le JPanel
 	setLayout (null) ;
-	setBackground (Color.yellow) ;
+	setBackground (Color.GRAY) ;
 	setOpaque (true);
 	setSize (face.getSize ()) ;
 	setPreferredSize (getSize ()) ;
