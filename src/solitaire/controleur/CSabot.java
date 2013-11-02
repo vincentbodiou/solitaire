@@ -16,14 +16,16 @@ public class CSabot extends Sabot {
 
 	public CSabot(String nom, Usine usine) {
 		super(nom, usine);
-		this.tasCache = (CTasDeCarte) cachees;
+		this.tasCache =  (CTasDeCarte) cachees;
 		this.tasVisible = (CTasDeCarte) visibles;
+		
 		p = new PSabot(this);
 		tasVisible.getPresentation().setXoffset(XOffset);
 	}
 
 	public void retournerCarte() throws Exception
 	{
+	    System.out.println("retournerCarte de Csabot");
 		if(!isRetournable())
 			super.retournerCarte();
 		else
@@ -78,12 +80,7 @@ public class CSabot extends Sabot {
 		
 		sabot.setReserve(tas);
 		try {
-			sabot.retournerCarte();
-			sabot.retournerCarte();
-			sabot.retournerCarte();
-			sabot.retournerCarte();
-			sabot.retournerCarte();
-			
+			sabot.retournerCarte();		
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -18,6 +18,7 @@ public class CTasDeCarte extends TasDeCartes {
 	}
 
 	public void empiler(Carte c) {
+	    System.out.println("empiler CTasDeCarte");
 		if (isEmpilable(c)) {
 			super.empiler(c);
 			try {
@@ -32,6 +33,7 @@ public class CTasDeCarte extends TasDeCartes {
 	}
 
 	public void depiler() throws Exception {
+	    System.out.println("depiler CTasDeCarte");
 		if(!isVide()){
 			CCarte c = (CCarte)getSommet();
 			super.depiler();

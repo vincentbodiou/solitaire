@@ -17,7 +17,7 @@ public class PTasDeCarte extends JPanel {
 	
 	public PTasDeCarte(String nom, Usine usine, CTasDeCarte cTasDeCarte) {
 		super();
-		this.setControleur(cTasDeCarte);
+		this.controleur = cTasDeCarte;
 		setLayout( null );
         setSize( PCarte.largeur, PCarte.hauteur );
         setPreferredSize( getSize() );
@@ -25,7 +25,7 @@ public class PTasDeCarte extends JPanel {
 	}
 
 	public void empiler(PCarte pCard) {
-
+	    System.out.println("empiler de PTasDeCarte");
 		int nbCard = getNbCard();
 		
 		int xOffset = getXoffset();
@@ -37,12 +37,12 @@ public class PTasDeCarte extends JPanel {
 		rafraichir();
 	}
 
-	private void rafraichir() {
-		
+	private void rafraichir() {		
 		repaint();
 	}
 	
 	public void depiler(PCarte c) {
+	    System.out.println("depiler de PTasDeCarte");
 		remove(c);
 		rafraichir();
 	}
