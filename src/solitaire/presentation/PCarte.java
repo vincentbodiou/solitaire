@@ -28,7 +28,6 @@ public class PCarte extends JPanel {
 	icone = new ImageIcon(ClassLoader.getSystemResource(chaine + ".gif"));
 	face = new JLabel (icone) ;
 	add (face) ;
-	face.setLocation (0, 0) ;
 	face.setSize (largeur, hauteur) ;
 
 	// image du dos

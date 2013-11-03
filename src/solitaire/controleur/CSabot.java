@@ -33,8 +33,7 @@ public class CSabot extends Sabot
         System.out.println( "retournerCarte de Csabot" );
         if ( !isRetournable() )
             super.retournerCarte();
-        else
-            super.retourner();
+
     }
 
     public void retourner() throws Exception
@@ -63,17 +62,7 @@ public class CSabot extends Sabot
         this.tasCache = tasCache;
     }
 
-    public PSabot getP()
-    {
-        return p;
-    }
-
-    public void setP( PSabot p )
-    {
-        this.p = p;
-    }
-
-    private PSabot getPresentation()
+    public PSabot getPresentation()
     {
         return p;
     }
@@ -98,6 +87,7 @@ public class CSabot extends Sabot
         try
         {
             sabot.retournerCarte();
+            sabot.retournerCarte();
 
         }
         catch ( Exception e )
@@ -108,7 +98,7 @@ public class CSabot extends Sabot
         frame.getContentPane().add( sabot.getPresentation() );
 
         frame.setVisible( true );
-        frame.setSize( 200, 400 );
+        frame.setSize( 400, 500 );
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 

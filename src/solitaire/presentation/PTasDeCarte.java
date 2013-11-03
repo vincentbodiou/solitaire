@@ -1,8 +1,10 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
+import javax.swing.border.Border;
 
 import solitaire.application.TasDeCartes;
 import solitaire.application.Usine;
@@ -19,9 +21,7 @@ public class PTasDeCarte extends JPanel {
 		super();
 		this.controleur = cTasDeCarte;
 		setLayout( null );
-        setSize( PCarte.largeur, PCarte.hauteur );
-        setPreferredSize( getSize() );
-        setBackground( Color.blue );
+        setBackground( Color.green );
 	}
 
 	public void empiler(PCarte pCard) {
@@ -38,6 +38,14 @@ public class PTasDeCarte extends JPanel {
 	}
 
 	private void rafraichir() {		
+	    int nbCarte = controleur.getNombre();
+	    int x = PCarte.largeur+(Xoffset*(nbCarte-1));
+	    int y = PCarte.hauteur+(Yoffset*(nbCarte-1));
+	    System.out.println("x = " + x + " y =" +y);
+	    
+	    setSize(x,y);
+	    setPreferredSize(getSize());
+       
 		repaint();
 	}
 	

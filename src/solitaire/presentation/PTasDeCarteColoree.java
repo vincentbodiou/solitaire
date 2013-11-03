@@ -10,72 +10,82 @@ public class PTasDeCarteColoree extends JPanel
 {
     @SuppressWarnings( "unused" )
     private CTasDeCarteColorees controleur;
+
     private static final long serialVersionUID = 1L;
+
     private int Xoffset;
+
     private int Yoffset;
 
-
-    public PTasDeCarteColoree(CTasDeCarteColorees c)
-    {   
+    public PTasDeCarteColoree( CTasDeCarteColorees c )
+    {
         super();
         this.controleur = c;
         setLayout( null );
         setSize( PCarte.largeur, PCarte.hauteur );
         setPreferredSize( getSize() );
-        setBackground( Color.green );      
+        setBackground( Color.green );
     }
 
-    public void empiler(PCarte pCard) {
-        System.out.println("empiler de PTasDeCarteAlterne");
+    public void empiler( PCarte pCard )
+    {
+        System.out.println( "empiler de PTasDeCarteAlterne" );
         int nbCard = getNbCard();
-        
+
         int xOffset = getXoffset();
         int yOffset = getYoffset();
 
-        add(pCard, 0);
-        pCard.setLocation((nbCard - 1) * xOffset,   ((nbCard - 1) * yOffset));
+        add( pCard, 0 );
+        pCard.setLocation( ( nbCard - 1 ) * xOffset, ( ( nbCard - 1 ) * yOffset ) );
 
         rafraichir();
     }
 
-    private void rafraichir() {     
+    private void rafraichir()
+    {
         repaint();
     }
-    
-    public void depiler(PCarte c) {
-        System.out.println("depiler de PTasDeCarteAlterne");
-        remove(c);
+
+    public void depiler( PCarte c )
+    {
+        System.out.println( "depiler de PTasDeCarteAlterne" );
+        remove( c );
         rafraichir();
     }
 
-
-    private int getNbCard() {
+    private int getNbCard()
+    {
         return controleur.getNombre();
     }
-    
-    public CTasDeCarteColorees getControleur() {
+
+    public CTasDeCarteColorees getControleur()
+    {
         return controleur;
     }
 
-    public void setControleur(CTasDeCarteColorees controleur) {
+    public void setControleur( CTasDeCarteColorees controleur )
+    {
         this.controleur = controleur;
     }
 
-    public int getXoffset() {
+    public int getXoffset()
+    {
         return Xoffset;
     }
 
-    public void setXoffset(int xoffset) {
+    public void setXoffset( int xoffset )
+    {
         Xoffset = xoffset;
     }
 
-    public int getYoffset() {
+    public int getYoffset()
+    {
         return Yoffset;
     }
 
-    public void setYoffset(int yoffset) {
+    public void setYoffset( int yoffset )
+    {
         Yoffset = yoffset;
     }
-    
-    
+
 }

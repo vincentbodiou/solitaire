@@ -19,8 +19,7 @@ public class PSabot extends JPanel {
 		add(visible);
 		setVisible(true);
 	}
-	
-	
+
 
 	public CSabot getControleur() {
 		return controleur;
