@@ -1,9 +1,11 @@
 package solitaire.presentation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +19,8 @@ import solitaire.usine.CUsine;
 
 public class PSolitaire extends JFrame
 {
-
+    public static int LARGEUR = 800;
+    public static int HAUTEUR = 1000;
     private static final long serialVersionUID = 1L;
     private CSolitaire controleur;
       
@@ -25,12 +28,12 @@ public class PSolitaire extends JFrame
     {
         controleur = c ;
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setLayout( new GridBagLayout() );
+        setLayout( new BorderLayout());
         getContentPane().setBackground(new Color(143, 143, 195)); // violet 
         
            
         setVisible( true );
-        setSize( 800, 600 );
+        setSize( LARGEUR, HAUTEUR );
         setLocationRelativeTo( getParent() );
         setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
@@ -39,30 +42,32 @@ public class PSolitaire extends JFrame
     {
         P7Colonne p7c = controleur.getColonnes();
         PSabot pSabot = controleur.getcSabot().getPresentation();
-        //P7Colonne colonnes = controleur.get
-       
-        GridBagConstraints c = new GridBagConstraints();
+        P4TasColoree p4c = controleur.getTasColorees();
+
+       add(p7c, BorderLayout.CENTER);
+       add(pSabot, BorderLayout.NORTH);
+       add(p4c, BorderLayout.WEST);
+        /*GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
         c.fill = GridBagConstraints.HORIZONTAL;
         
-        
-        pSabot.setMinimumSize( pSabot.getSize() );
-        add( pSabot, c );
+        pSabot.setPreferredSize( pSabot.getSize() );
+        getContentPane().add( pSabot, c );
 
         c.gridx = 0;
         c.gridy = 1;
         p7c.setMinimumSize( p7c.getMinimumSize() );
-        add( p7c, c );
-//
-//        c.gridx = 1;
-//        c.gridy = 0;
-//        c.gridheight = 2;
-//        c.fill = GridBagConstraints.VERTICAL;
-//        p4carteColoree.setMinimumSize( p4carteColoree.getMinimumSize() );
-//        add( p4carteColoree, c,0 );
-//
-        setSize( 1300, 2000 );
+        getContentPane().add( p7c, c );
+
+        c.gridx = 1;
+        c.gridy = 0;
+        c.gridheight = 2;
+        c.fill = GridBagConstraints.VERTICAL;
+        p4c.setMinimumSize( p4c.getMinimumSize() );
+        getContentPane().add( p4c, c,0 );*/
+
+        setSize( LARGEUR, HAUTEUR );
         setPreferredSize( getSize() );
         this.pack(); // dimensionner le cadre
         setLocation( 0, 0 ); // le positionner

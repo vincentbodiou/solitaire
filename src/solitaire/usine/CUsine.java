@@ -23,7 +23,7 @@ public class CUsine extends Usine
         return new CSolitaire( nom, usine );
     }
 
-    public TasDeCartesColorees newTasDeCarteColorees( String name, int couleur, Usine u )
+    public TasDeCartesColorees newTasDeCartesColorees( String name, int couleur, Usine u )
     {
         return new CTasDeCarteColorees( name, couleur, u );
     }
