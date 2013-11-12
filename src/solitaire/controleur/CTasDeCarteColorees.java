@@ -4,6 +4,7 @@ import java.awt.Component;
 
 import javax.swing.JFrame;
 
+import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 import solitaire.presentation.*;
@@ -22,13 +23,13 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
         p = new PTasDeCarteColoree( this );
     }
 
-    public void empiler( CCarte c )
+    public void empiler( Carte c )
     {
         System.out.println( "empiler CTasDeCarteColoree" );
         if ( isEmpilable( c ) )
         {
             super.empiler( c );
-            p.empiler( c.getPresentation() );
+            p.empiler( ( (CCarte) c ).getPresentation() );
         }
         else
             System.out.println("impossible d'empiler sur le tas de carte coloree");
@@ -44,6 +45,16 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
         this.p = p;
     }
 
+    public CTasDeCarte getTas()
+    {
+        return tas;
+    }
+
+    public void setTas( CTasDeCarte tas )
+    {
+        this.tas = tas;
+    }
+    
     public static void main( String[] args )
     {
         JFrame frame = new JFrame( "Test CTasDeCarteColoree" );
@@ -77,14 +88,6 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
 
-    public CTasDeCarte getTas()
-    {
-        return tas;
-    }
-
-    public void setTas( CTasDeCarte tas )
-    {
-        this.tas = tas;
-    }
+   
 
 }
