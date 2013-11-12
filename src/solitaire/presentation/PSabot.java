@@ -1,7 +1,14 @@
 package solitaire.presentation;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JPanel;
 
+import listener.ClickListener;
+import solitaire.controleur.CCarte;
 import solitaire.controleur.CSabot;
 
 public class PSabot extends JPanel {
@@ -18,6 +25,7 @@ public class PSabot extends JPanel {
 		add(reserve);
 		add(visible);
 		setVisible(true);
+		reserve.addMouseListener( new RetournerCarteSabot() );
 	}
 
 
@@ -43,6 +51,20 @@ public class PSabot extends JPanel {
 
 	public void setVisible(PTasDeCarte visible) {
 		this.visible = visible;
-	}
-
+	}  
+	
+	private class RetournerCarteSabot extends ClickListener {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            try
+            {
+                controleur.retournerCarte();
+            }
+            catch ( Exception e1 )
+            {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+        }
+    }
 }

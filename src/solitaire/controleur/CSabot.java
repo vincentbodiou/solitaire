@@ -33,13 +33,16 @@ public class CSabot extends Sabot
         System.out.println( "retournerCarte de Csabot" );
         if ( !isRetournable() )
             super.retournerCarte();
-
+        else
+            super.retourner();
+            
     }
 
     public void retourner() throws Exception
     {
-        if ( isRetournable() )
-            super.retourner();
+        if ( isRetournable() ){
+            super.retourner();            
+        }
     }
 
     public CTasDeCarte getTasVisible()

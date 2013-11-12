@@ -29,7 +29,7 @@ public class PTasDeCarteColoree extends JPanel
 
     public void empiler( PCarte pCard )
     {
-        System.out.println( "empiler de PTasDeCarteAlterne" );
+        System.out.println( "empiler de PTasDeCarteColoree" );
         int nbCard = getNbCard();
 
         int xOffset = getXoffset();

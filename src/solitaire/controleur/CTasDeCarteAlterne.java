@@ -36,7 +36,6 @@ public class CTasDeCarteAlterne extends TasDeCartesAlternees
         {
             System.out.println( "impossible d'empiler" );
         }
-
     }
 
     public void depiler() throws Exception
