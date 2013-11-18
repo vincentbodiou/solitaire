@@ -13,7 +13,6 @@ public class launcher
         CSolitaire solitaire = new CSolitaire( "solitaire", usine );
         solitaire.initialiser();
         solitaire.init();
-        solitaire.run();
-        
+        solitaire.run();        
     }
 }

@@ -1,12 +1,7 @@
 package solitaire.controleur;
 
-import java.io.ObjectInputStream.GetField;
-
 import javax.swing.JFrame;
-import javax.tools.JavaCompiler.CompilationTask;
-
 import solitaire.application.Colonne;
-import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
 import solitaire.usine.CUsine;
@@ -105,6 +100,7 @@ public class CColonne extends Colonne
         try
         {            
             c.retournerCarte();
+            
         }
         catch ( Exception e )
         {

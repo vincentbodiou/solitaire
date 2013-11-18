@@ -79,7 +79,7 @@ public class CTasDeCarte extends TasDeCartes
         tasDeCarte.getPresentation().setXoffset( 30 );
         tasDeCarte.getPresentation().setYoffset( 0 );
         tasDeCarte.empiler( c1 );
-       // tasDeCarte.empiler( c2 );
+        tasDeCarte.empiler( c2 );
 //        tasDeCarte.empiler(c3);
 //        tasDeCarte.empiler(c4);
         try
