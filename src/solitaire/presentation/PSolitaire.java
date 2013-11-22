@@ -30,8 +30,7 @@ public class PSolitaire extends JFrame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLayout( new BorderLayout());
         getContentPane().setBackground(new Color(143, 143, 195)); // violet 
-        
-           
+                   
         setVisible( true );
         setSize( LARGEUR, HAUTEUR );
         setLocationRelativeTo( getParent() );

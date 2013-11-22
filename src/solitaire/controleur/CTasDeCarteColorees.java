@@ -24,8 +24,7 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
     }
 
     public void empiler( Carte c )
-    {
-        System.out.println( "empiler CTasDeCarteColoree" );
+    {       
         if ( isEmpilable( c ) )
         {
             super.empiler( c );

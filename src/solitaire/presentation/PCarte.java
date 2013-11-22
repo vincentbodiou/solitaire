@@ -2,15 +2,32 @@ package solitaire.presentation ;
 
 //import solitaire.controle.* ;
 import java.awt.* ;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.awt.event.* ;
+import java.io.IOException;
+
 import javax.swing.* ;
+
+import solitaire.controleur.CCarte;
 
 /**
  * Composant Présentation d'une carte
  */
-public class PCarte extends JPanel {
+public class PCarte extends JPanel implements Transferable{
 
-    //protected CCarte controle ;		// contrôleur associé
+    protected CCarte controle ;		// contrôleur associé
+    public CCarte getControle()
+    {
+        return controle;
+    }
+
+    public void setControle( CCarte controle )
+    {
+        this.controle = controle;
+    }
+
     protected JLabel face, dos ;
     protected ImageIcon icone ;			// image de la face
     protected static ImageIcon iconeDos;	// image du dos
@@ -20,9 +37,9 @@ public class PCarte extends JPanel {
      * initialiser une carte
      * @param chaine : nom de la carte (exemple "3H" = 3 Heart)
      */
-    //public PCarte (final String chaine, final CCarte controle) {
-    public PCarte (final String chaine) {
-	//this.controle = controle ;
+    public PCarte (final String chaine, final CCarte controle) {
+    //public PCarte (final String chaine) {
+	this.controle = controle ;
 
 	// image de la face 
 	icone = new ImageIcon(ClassLoader.getSystemResource(chaine + ".gif"));
@@ -82,7 +99,7 @@ public class PCarte extends JPanel {
 	f.getContentPane ().setBackground(new Color(143, 143, 195)); // violet pâle
 
 	// une carte visible
-	PCarte pc = new PCarte ("QH");
+	/*PCarte pc = new PCarte ("QH");
 	pc.setFaceVisible(true);
 	f.getContentPane ().add(pc) ;
 
@@ -93,7 +110,26 @@ public class PCarte extends JPanel {
 
 	f.pack () ;		// dimensionner le cadre
 	f.setLocation(200,100);	// le positionner
-	f.setVisible (true) ;	// et le rendre visible
+	f.setVisible (true) ;	// et le rendre visible*/
     } // main
+
+    @Override
+    public Object getTransferData( DataFlavor flavor ) throws UnsupportedFlavorException, IOException
+    {
+        return this;
+    }
+
+    @Override
+    public DataFlavor[] getTransferDataFlavors()
+    {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isDataFlavorSupported( DataFlavor flavor )
+    {
+        return true;
+    }
 
 } // PCarte

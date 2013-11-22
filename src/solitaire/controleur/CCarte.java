@@ -13,7 +13,7 @@ public class CCarte extends Carte{
 	
 	public CCarte(int v, int c) {
 		super(Math.max(1, Math.min(v, NbCartesParCouleur)), Math.max(1,	Math.min(c, NbCouleurs)));
-		p = new PCarte( valeurs[getValeur() - 1] + couleurs[getCouleur() - 1] );
+		p = new PCarte( valeurs[getValeur() - 1] + couleurs[getCouleur() - 1] , this);
         p.setFaceVisible( isFaceVisible() );		
 	}
 	

@@ -1,6 +1,9 @@
 package solitaire.controleur;
 
 import javax.swing.JFrame;
+import javax.swing.RepaintManager;
+
+import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
@@ -10,7 +13,9 @@ public class CColonne extends Colonne
 {
 
     private static int YOffsetAlt = 30;
+
     private static int YOffsetCache = 10;
+
     private static int XOffset = 0;
 
     private CTasDeCarte tasCachee;
@@ -31,6 +36,7 @@ public class CColonne extends Colonne
         p.getTasVisible().setYoffset( YOffsetAlt );
     }
 
+    @Override
     public void retournerCarte() throws Exception
     {
         System.out.println( "retournerCarte de CColonne" );
@@ -38,21 +44,32 @@ public class CColonne extends Colonne
             super.retournerCarte();
     }
 
-    public void empiler(CCarte c)
+    @Override
+    public void empiler( Carte c )
     {
-        if(isEmpilable( c ))
+        if ( isEmpilable( c ) )
             super.empiler( c );
         else
-            System.out.println("carte non empilable sur ce tas de carte alternee");
+            System.out.println( "carte non empilable sur ce tas de carte alternee" );
+    }
+
+      
+    
+    public void finDnDDrop( Carte carte )
+    {        
+        if ( isEmpilable( carte ) )
+        {
+            System.out.println("on est la");
+            empiler( carte );         
+            p.finDnDValide();
+        }
+        else
+        {
+            p.finDnDInvalid();
+        }
+
     }
     
-    public void empiler(CTasDeCarte t)
-    {
-        if(isEmpilable( t ))
-            super.empiler( t );
-        else
-            System.out.println("tas non empilable sur ce tas de carte alternee");
-    }
 
     public CTasDeCarteAlterne getTasVisible()
     {
@@ -96,11 +113,11 @@ public class CColonne extends Colonne
         tas.empiler( c4 );
 
         c.setReserve( tas );
-        
+
         try
-        {            
+        {
             c.retournerCarte();
-            
+
         }
         catch ( Exception e )
         {
@@ -110,9 +127,11 @@ public class CColonne extends Colonne
         frame.getContentPane().add( c.getPresentation() );
 
         frame.setVisible( true );
-        frame.setSize( 100,400);
+        frame.setSize( 100, 400 );
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
+
+   
 
 }

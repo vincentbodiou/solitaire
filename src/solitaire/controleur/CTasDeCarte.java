@@ -23,9 +23,9 @@ public class CTasDeCarte extends TasDeCartes
 
     }
 
+    @Override
     public void empiler( Carte c )
     {
-        System.out.println( "empiler CTasDeCarte" );
         if ( isEmpilable( c ) )
         {
             super.empiler( c );
@@ -44,9 +44,9 @@ public class CTasDeCarte extends TasDeCartes
         }
     }
 
+    @Override
     public void depiler() throws Exception
     {
-        System.out.println( "depiler CTasDeCarte" );
         if ( !isVide() )
         {
             CCarte c = (CCarte) getSommet();

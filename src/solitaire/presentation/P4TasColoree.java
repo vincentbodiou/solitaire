@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import solitaire.application.Usine;
+import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarte;
 import solitaire.controleur.CTasDeCarteColorees;
 import solitaire.usine.CUsine;
@@ -51,46 +52,46 @@ public class P4TasColoree extends JPanel
        tasPique = new CTasDeCarteColorees( "pique" , 1, u );
 
 
-       PCarte cartePique1 = new PCarte( "2S" );
+       CCarte cartePique1 = new CCarte( 2,0 );
        cartePique1.setFaceVisible( true );
-       tasPique.getPresentation().empiler( cartePique1 );
+       tasPique.getPresentation().empiler( cartePique1.getPresentation() );
 
-       PCarte cartePique2 = new PCarte( "3S" );
+       CCarte cartePique2 = new CCarte( 3,0 );
        cartePique2.setFaceVisible( true );
-       tasPique.getPresentation().empiler( cartePique2 );
+       tasPique.getPresentation().empiler( cartePique2.getPresentation() );
 
        // Coeur
        tasCoeur = new CTasDeCarteColorees( "coeur",2,u );
 
-       PCarte carteCoeur1 = new PCarte( "2H" );
+       CCarte carteCoeur1 = new CCarte( 2,1 );
        carteCoeur1.setFaceVisible( true );
-       tasCoeur.getPresentation().empiler( carteCoeur1 );
+       tasCoeur.getPresentation().empiler( carteCoeur1.getPresentation() );
 
-       PCarte carteCoeur2 = new PCarte( "3H" );
+       CCarte carteCoeur2 = new CCarte( 3,1 );
        carteCoeur2.setFaceVisible( true );
-       tasCoeur.getPresentation().empiler( carteCoeur2 );
+       tasCoeur.getPresentation().empiler( carteCoeur2.getPresentation() );
 
        // Carreau
        tasCarreau = new CTasDeCarteColorees( "carreau", 0, u );
 
-       PCarte carteCarreau1 = new PCarte( "2D" );
+       CCarte carteCarreau1 = new CCarte( 2,4 );
        carteCarreau1.setFaceVisible( true );
-       tasCarreau.getPresentation().empiler( carteCarreau1 );
+       tasCarreau.getPresentation().empiler( carteCarreau1.getPresentation() );
 
-       PCarte carteCarreau2 = new PCarte( "3D" );
+       CCarte carteCarreau2 = new CCarte( 2,4);
        carteCarreau2.setFaceVisible( true );
-       tasCarreau.getPresentation().empiler( carteCarreau2 );
+       tasCarreau.getPresentation().empiler( carteCarreau2.getPresentation() );
 
        // Trefle
        tasTrefle = new CTasDeCarteColorees( "trefle", 3, u );
 
-       PCarte carteTrefle1 = new PCarte( "2C" );
+       CCarte carteTrefle1 = new CCarte( 2,4 );
        carteTrefle1.setFaceVisible( true );
-       tasTrefle.getPresentation().empiler( carteTrefle1 );
+       tasTrefle.getPresentation().empiler( carteTrefle1.getPresentation() );
 
-       PCarte carteTrefle2 = new PCarte( "3C" );
+       CCarte carteTrefle2 = new CCarte( 3,3 );
        carteTrefle2.setFaceVisible( true );
-       tasTrefle.getPresentation().empiler( carteTrefle2 );
+       tasTrefle.getPresentation().empiler( carteTrefle2.getPresentation() );
 
        
        CTasDeCarteColorees [] tab = new CTasDeCarteColorees[4];

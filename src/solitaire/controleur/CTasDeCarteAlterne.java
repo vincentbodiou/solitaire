@@ -20,10 +20,9 @@ public class CTasDeCarteAlterne extends TasDeCartesAlternees
         p = new PTasDeCarteAlterne( this );
     }
 
+    
     public void empiler( Carte c )
-    {
-        System.out.println( "empiler CTasDeCarteAlternee" );
-
+    {        
         super.empiler( c );
         try
         {
@@ -40,7 +39,6 @@ public class CTasDeCarteAlterne extends TasDeCartesAlternees
 
     public void depiler() throws Exception
     {
-        System.out.println( "depiler CTasDeCarteAlternee" );
         if ( !isVide() )
         {
             CCarte c = (CCarte) getSommet();

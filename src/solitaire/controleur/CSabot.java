@@ -1,6 +1,10 @@
 package solitaire.controleur;
 
+import java.awt.Point;
+
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.tools.JavaFileManager.Location;
 
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
@@ -9,7 +13,8 @@ import solitaire.usine.CUsine;
 
 public class CSabot extends Sabot
 {
-
+    private CSolitaire solitaire;
+    
     private CTasDeCarte tasVisible;
 
     private CTasDeCarte tasCache;
@@ -44,6 +49,38 @@ public class CSabot extends Sabot
             super.retourner();            
         }
     }
+    
+
+    public void p2c_debutDnDDrag( CCarte carte )
+    {
+        if(carte != null)
+        {
+            try
+            {
+                if(this.getSommet()==carte)
+                {
+                    depiler();                   
+                    p.debutDnDValide();
+                }
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+            }
+        } else {
+            p.debutDnDInvalide();            
+        }
+        
+    }
+    
+    
+
+    public void p2c_finDnDDrag( CCarte carte, boolean dropSuccess )
+    {
+        if(!dropSuccess)
+            empiler(carte);
+    }
+    
 
     public CTasDeCarte getTasVisible()
     {
@@ -106,5 +143,8 @@ public class CSabot extends Sabot
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
     }
+
+    
+
 
 }
