@@ -53,14 +53,16 @@ public class CSabot extends Sabot
 
     public void p2c_debutDnDDrag( CCarte carte )
     {
+        CTasDeCarte tas = new CTasDeCarte( "temp", new CUsine() );
         if(carte != null)
         {
             try
             {
                 if(this.getSommet()==carte)
                 {
-                    depiler();                   
-                    p.debutDnDValide();
+                    depiler();   
+                    tas.empiler( carte );
+                    p.debutDnDValide(tas.getPresentation());
                 }
             }
             catch ( Exception e )

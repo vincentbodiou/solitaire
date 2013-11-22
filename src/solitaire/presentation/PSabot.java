@@ -173,13 +173,13 @@ public class PSabot extends JPanel
         }
     }
 
-    public void debutDnDValide()
+    public void debutDnDValide(PTasDeCarte tas)
     {
         
-        dragSource.startDrag( theInitialEvent, DragSource.DefaultMoveNoDrop, selected, myDragSourceListerner );
+        dragSource.startDrag( theInitialEvent, DragSource.DefaultMoveNoDrop, tas, myDragSourceListerner );
         
         dragFrame = new JFrame();
-        dragFrame.add( selected );                
+        dragFrame.add( tas );                
         dragFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
         dragFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         dragFrame.setUndecorated(true);

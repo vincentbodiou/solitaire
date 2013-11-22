@@ -53,23 +53,85 @@ public class CColonne extends Colonne
             System.out.println( "carte non empilable sur ce tas de carte alternee" );
     }
 
-      
-    
-    public void finDnDDrop( Carte carte )
-    {        
-        if ( isEmpilable( carte ) )
+    public void p2c_debutDnDDrag( CTasDeCarte Tascarte )
+    {
+        CTasDeCarte tmp = new CTasDeCarte( "drag", new CUsine() );
+        CTasDeCarte tmpTasBonSens = new CTasDeCarte( "drag", new CUsine() );
+
+        if ( Tascarte != null )
         {
-            System.out.println("on est la");
-            empiler( carte );         
-            p.finDnDValide();
+            try
+            {
+                Carte carte = Tascarte.getSommet();
+                // on a empiler dans un tas de carte intermédiaire les cartes
+                // selectionnées pour le Dnd
+                try
+                {
+                    while ( this.getSommet() != carte )
+
+                    {
+                        Carte tmpCarte = this.getSommet();
+                        depiler();
+                        tmp.empiler( tmpCarte );
+                    }
+                }
+                catch ( java.util.EmptyStackException e )
+                {
+                    System.out.println("empty");
+                }
+                tmp.empiler( carte );
+
+                // le tas de carte intermediaire est dans le mauvais sens donc
+                // on le retourne
+                Carte tmpCarteBonSens = tmp.getSommet();
+                while ( tmp.isVide() )
+                {
+                    tmpCarteBonSens = tmp.getSommet();
+                    tmp.depiler();
+                    tmpTasBonSens.empiler( tmpCarteBonSens );
+                }
+
+                p.c2p_debutDnDValide( tmpTasBonSens.getPresentation() );
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+            }
         }
         else
         {
-            p.finDnDInvalid();
+            p.c2p_debutDnDInvalide();
         }
+    }
+
+    public void p2c_finDnDDrag( CTasDeCarte selectedControl, boolean dropSuccess )
+    {
 
     }
-    
+
+    public void p2c_DragEnter( CTasDeCarte tas )
+    {
+        if ( isEmpilable( tas ) )
+        {
+            tas.getPresentation().c2p_isEmpilable();
+        }
+        else 
+            tas.getPresentation().c2p_isNotEmpilable();
+    }
+
+    public void finDnDDrop( CTasDeCarte tas )
+    {
+                if ( isEmpilable( tas ) )
+                {
+                    empiler( tas );
+                    p.finDnDValide();
+                }
+                else
+                {
+                    p.finDnDInvalid();
+                }      
+
+    }
 
     public CTasDeCarteAlterne getTasVisible()
     {
@@ -131,7 +193,5 @@ public class CColonne extends Colonne
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
-
-   
 
 }

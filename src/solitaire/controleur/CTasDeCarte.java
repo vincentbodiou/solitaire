@@ -13,7 +13,6 @@ import solitaire.usine.CUsine;
 
 public class CTasDeCarte extends TasDeCartes
 {
-
     private PTasDeCarte p;
 
     public CTasDeCarte( String nom, Usine usine )
@@ -100,4 +99,6 @@ public class CTasDeCarte extends TasDeCartes
         frame.setVisible (true) ;   // et le rendre visible
 
     }
+
+    
 }
