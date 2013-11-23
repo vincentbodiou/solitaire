@@ -1,132 +1,39 @@
 package solitaire.presentation;
 
-import java.awt.Cursor;
-import java.awt.Point;
 import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceMotionListener;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.dnd.DragSourceListener;
-import java.util.EventListener;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import listener.ClickListener;
-import listener.ADragSourceListener;
-import solitaire.controleur.CCarte;
+import solitaire.DnD.ADnD;
+import solitaire.DnD.IControleurDnD;
 import solitaire.controleur.CSabot;
 
 
-public class PSabot extends JPanel
+public class PSabot extends ADnD
 {
-
     private static final long serialVersionUID = 1L;
-
-    private CSabot controleur;
 
     private PTasDeCarte reserve;
 
     private PTasDeCarte visible;
 
-    protected DragSource dragSource = null;
-
-    protected SabotDragSourceListener myDragSourceListerner = null;
-
-    protected DragGestureEvent theInitialEvent;
-
-    protected DropTargetDropEvent theFinalEvent;
-
-    protected DropTarget dropTarget = null;
-
-    private PCarte selected = null;
-
-    private CCarte selectedControl = null;
-
-    private Point dragOrigin = null;
-    
-    private JFrame dragFrame = null;
-
     public PSabot( CSabot s )
     {
-        setControleur( s );
+        controlleur = s;
         this.reserve = s.getTasCache().getPresentation();
         this.visible = s.getTasVisible().getPresentation();
+        composantContainDragger = this.visible;
         add( reserve );
         add( visible );
         setVisible( true );
         reserve.addMouseListener( new RetournerCarteSabot() );
-        myDragSourceListerner = new SabotDragSourceListener();
+        myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
-        dragSource.createDefaultDragGestureRecognizer( visible, DnDConstants.ACTION_MOVE, new SabotDragGestureListener() );
-        dragSource.addDragSourceMotionListener( new SabotDragSourceMotionListener() );
+        dragSource.createDefaultDragGestureRecognizer( visible, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
+        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );
     }
-
-    public class SabotDragSourceMotionListener implements DragSourceMotionListener
-    {
-        @Override
-        public void dragMouseMoved( DragSourceDragEvent evt )
-        {
-            int parentX = getRootPane().getParent().getX();
-            int parentY = getRootPane().getParent().getY();
-            int eventX = evt.getLocation().x+5;
-            int eventY = evt.getLocation().y-5;
-            dragFrame.setLocation( eventX - parentX, eventY - parentY );
-            repaint();
-        }
-    }
-
-    public class SabotDragGestureListener implements DragGestureListener
-    {
-
-        @Override
-        public void dragGestureRecognized( DragGestureEvent evt )
-        {
-            selected = null;
-            selectedControl = null;
-            theInitialEvent = evt;
-            dragOrigin = evt.getDragOrigin();
-            try
-            {
-                selected = (PCarte) visible.getComponentAt( dragOrigin );
-                selectedControl = (CCarte) selected.getControleur();
-            }
-            catch ( Exception e )
-            {
-
-            }
-
-            controleur.p2c_debutDnDDrag( selectedControl );
-        }
-    }
-
-    public class SabotDragSourceListener extends ADragSourceListener
-    {
-            
-        @Override
-        public void dragDropEnd( DragSourceDropEvent evt )
-        {
-            controleur.p2c_finDnDDrag( selected.getControleur(), evt.getDropSuccess() );
-            dragFrame.setVisible( false );
-            repaint();
-        }
-
-        @Override
-        public void dragEnter( DragSourceDragEvent evt )
-        {
-            evt.getDragSourceContext().setCursor( new Cursor( Cursor.MOVE_CURSOR ) );
-        }
-    }
-
+   
     private class RetournerCarteSabot extends ClickListener
     {
         @Override
@@ -134,49 +41,23 @@ public class PSabot extends JPanel
         {
             try
             {
-                controleur.retournerCarte();
+                ((CSabot)controlleur).retournerCarte();
             }
             catch ( Exception e1 )
             {
                 e1.printStackTrace();
             }
         }
-    }
-
-    public void debutDnDValide(PTasDeCarte tas)
-    {
-        
-        dragSource.startDrag( theInitialEvent, DragSource.DefaultMoveNoDrop, tas, myDragSourceListerner );
-        
-        dragFrame = new JFrame();
-        dragFrame.add( tas );                
-        dragFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
-        dragFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        dragFrame.setUndecorated(true);
-        dragFrame.setVisible( true );
-        dragFrame.pack();
-        repaint();
-    }
-
-    public void debutDnDInvalide()
-    {
-        theFinalEvent.acceptDrop( DnDConstants.ACTION_MOVE );
-        theFinalEvent.getDropTargetContext().dropComplete( true );
-    }
-
-    public void finDnDInvalide()
-    {
-        theFinalEvent.rejectDrop();
-    }
+    } 
     
     public CSabot getControleur()
     {
-        return controleur;
+        return ((CSabot)controlleur);
     }
 
-    public void setControleur( CSabot controleur )
+    public void setControleur( IControleurDnD controleur )
     {
-        this.controleur = controleur;
+        controlleur = controleur;
     }
 
     public PTasDeCarte getReserve()

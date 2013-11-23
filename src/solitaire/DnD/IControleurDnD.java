@@ -1,4 +1,4 @@
-package solitaire.Apresentation;
+package solitaire.DnD;
 
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarte;

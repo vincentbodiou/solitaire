@@ -6,12 +6,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.tools.JavaFileManager.Location;
 
+import solitaire.DnD.IControleurDnD;
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
 import solitaire.presentation.PSabot;
 import solitaire.usine.CUsine;
 
-public class CSabot extends Sabot
+public class CSabot extends Sabot implements IControleurDnD
 {
     private CSolitaire solitaire;
     
@@ -50,7 +51,7 @@ public class CSabot extends Sabot
         }
     }
     
-
+    @Override
     public void p2c_debutDnDDrag( CCarte carte )
     {
         CTasDeCarte tas = new CTasDeCarte( "temp", new CUsine() );
@@ -62,7 +63,7 @@ public class CSabot extends Sabot
                 {
                     depiler();   
                     tas.empiler( carte );
-                    p.debutDnDValide(tas.getPresentation());
+                    p.c2p_debutDnDValide(tas.getPresentation());
                 }
             }
             catch ( Exception e )
@@ -70,19 +71,32 @@ public class CSabot extends Sabot
                 e.printStackTrace();
             }
         } else {
-            p.debutDnDInvalide();            
+            p.c2p_debutDnDInvalide();            
         }
         
     }
     
     
-
-    public void p2c_finDnDDrag( CCarte carte, boolean dropSuccess )
+    @Override
+    public void p2c_finDnDDrag( CTasDeCarte carte, boolean dropSuccess )
     {
         if(!dropSuccess)
             empiler(carte);
     }
     
+    @Override
+    public void p2c_DragEnter( CTasDeCarte tas )
+    {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void finDnDDrop( CTasDeCarte tas )
+    {
+        // TODO Auto-generated method stub
+        
+    }
 
     public CTasDeCarte getTasVisible()
     {
@@ -145,8 +159,5 @@ public class CSabot extends Sabot
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
     }
-
-    
-
 
 }

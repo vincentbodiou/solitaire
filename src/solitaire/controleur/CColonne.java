@@ -3,7 +3,7 @@ package solitaire.controleur;
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
 
-import solitaire.Apresentation.IControleurDnD;
+import solitaire.DnD.IControleurDnD;
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;

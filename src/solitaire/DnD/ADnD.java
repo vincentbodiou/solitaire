@@ -1,4 +1,4 @@
-package solitaire.Apresentation;
+package solitaire.DnD;
 
 import java.awt.Cursor;
 import java.awt.Point;
@@ -71,6 +71,7 @@ public abstract class ADnD extends JPanel
             {
                 e.printStackTrace();
             }
+            if(controlleur==null ) System.out.println("control NULLL");
             controlleur.p2c_debutDnDDrag( selectedControl );
         }
     }
