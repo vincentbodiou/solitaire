@@ -103,26 +103,9 @@ public class CColonne extends Colonne
     public void p2c_finDnDDrag( CTasDeCarte tasTemp, boolean dropSuccess )
     {
         if(!dropSuccess)
-        {
-            CTasDeCarte tasAlEndroi=new CTasDeCarte( "temp", new CUsine() );
-            while(!tasTemp.isVide())
-            {
-                Carte c = null;
-                try
-                {
-                    c = tasTemp.getSommet();
-                    tasTemp.depiler();
-                    tasAlEndroi.empiler( c );                    
-                }
-                catch ( Exception e )
-                {
-                    System.out.println("erreur pour rempiler les cartes en cours de déplacement");
-                    return;
-                }                
-            }
-            visibles.empiler( tasAlEndroi );
-        }
-            
+        {          
+            visibles.empiler( tasTemp );
+        }            
     }
 
     public void p2c_DragEnter( CTasDeCarte tas )
