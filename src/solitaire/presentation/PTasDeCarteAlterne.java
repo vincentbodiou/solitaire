@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import javax.swing.JPanel;
 
-import listener.MyDragSourceListener;
+import listener.ADragSourceListener;
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarte;
 import solitaire.controleur.CTasDeCarteAlterne;
@@ -36,9 +36,6 @@ public class PTasDeCarteAlterne extends JPanel
     private static final long serialVersionUID = 1L;
 
     
-    
-    
-
     public PTasDeCarteAlterne( CTasDeCarteAlterne c )
     {
         super();

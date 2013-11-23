@@ -22,7 +22,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import listener.ClickListener;
-import listener.MyDragSourceListener;
+import listener.ADragSourceListener;
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CSabot;
 
@@ -109,7 +109,7 @@ public class PSabot extends JPanel
         }
     }
 
-    public class SabotDragSourceListener extends MyDragSourceListener
+    public class SabotDragSourceListener extends ADragSourceListener
     {
             
         @Override

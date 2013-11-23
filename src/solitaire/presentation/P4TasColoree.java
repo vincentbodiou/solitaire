@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import listener.MyDragSourceListener;
+import listener.ADragSourceListener;
 import solitaire.application.Usine;
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarte;

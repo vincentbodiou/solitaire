@@ -18,7 +18,7 @@ import java.awt.dnd.DropTargetListener;
 
 import javax.swing.JPanel;
 
-import listener.MyDragSourceListener;
+import listener.ADragSourceListener;
 import solitaire.controleur.*;
 
 
@@ -71,7 +71,7 @@ public class PTasDeCarteColoree extends JPanel
         }
     }
 
-    class ColorDragSourceListener extends MyDragSourceListener
+    class ColorDragSourceListener extends ADragSourceListener
     {
         @Override
         public void dragDropEnd( DragSourceDropEvent evt )

@@ -3,13 +3,14 @@ package solitaire.controleur;
 import javax.swing.JFrame;
 import javax.swing.RepaintManager;
 
+import solitaire.Apresentation.IControleurDnD;
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;
 import solitaire.presentation.PColonne;
 import solitaire.usine.CUsine;
 
-public class CColonne extends Colonne
+public class CColonne extends Colonne implements IControleurDnD
 {
 
     private static int YOffsetAlt = 30;
@@ -53,6 +54,7 @@ public class CColonne extends Colonne
             System.out.println( "carte non empilable sur ce tas de carte alternee" );
     }
 
+    @Override
     public void p2c_debutDnDDrag( CCarte carte )
     {
         CTasDeCarte tmp = new CTasDeCarte( "drag", new CUsine() ); // Tas
@@ -99,7 +101,8 @@ public class CColonne extends Colonne
             p.c2p_debutDnDInvalide();
         }
     }
-
+    
+    @Override
     public void p2c_finDnDDrag( CTasDeCarte tasTemp, boolean dropSuccess )
     {
         if(!dropSuccess)
@@ -108,6 +111,7 @@ public class CColonne extends Colonne
         }            
     }
 
+    @Override
     public void p2c_DragEnter( CTasDeCarte tas )
     {
         if ( isEmpilable( tas ) )
@@ -118,6 +122,7 @@ public class CColonne extends Colonne
             tas.getPresentation().c2p_isNotEmpilable();
     }
 
+    @Override
     public void finDnDDrop( CTasDeCarte tas )
     {
         if ( isEmpilable( tas ) )
