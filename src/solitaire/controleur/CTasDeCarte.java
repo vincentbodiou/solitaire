@@ -19,7 +19,6 @@ public class CTasDeCarte extends TasDeCartes
     {
         super( nom, usine );
         p = new PTasDeCarte( nom, usine, this );
-
     }
 
     @Override

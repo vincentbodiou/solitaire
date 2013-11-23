@@ -53,49 +53,45 @@ public class CColonne extends Colonne
             System.out.println( "carte non empilable sur ce tas de carte alternee" );
     }
 
-    public void p2c_debutDnDDrag( CTasDeCarte Tascarte )
+    public void p2c_debutDnDDrag( CCarte carte )
     {
-        CTasDeCarte tmp = new CTasDeCarte( "drag", new CUsine() );
-        CTasDeCarte tmpTasBonSens = new CTasDeCarte( "drag", new CUsine() );
+        CTasDeCarte tmp = new CTasDeCarte( "drag", new CUsine() ); // Tas
+                                                                   // temporaire
+                                                                   // dans le
+                                                                   // mauvais
+                                                                   // sens
+        CTasDeCarte tmp2 = new CTasDeCarte( "drag", new CUsine() ); // Tas ds le
+                                                                    // bon sens
 
-        if ( Tascarte != null )
+        tmp2.getPresentation().setYoffset( 20 );
+        if ( carte != null )
         {
             try
             {
-                Carte carte = Tascarte.getSommet();
-                // on a empiler dans un tas de carte intermédiaire les cartes
-                // selectionnées pour le Dnd
-                try
+                while ( visibles.getSommet() != carte )
                 {
-                    while ( this.getSommet() != carte )
-
-                    {
-                        Carte tmpCarte = this.getSommet();
-                        depiler();
-                        tmp.empiler( tmpCarte );
-                    }
+                    System.out.println( "on y ai" );
+                    Carte tmpCarte = visibles.getSommet();
+                    visibles.depiler();
+                    tmp.empiler( tmpCarte );
                 }
-                catch ( java.util.EmptyStackException e )
-                {
-                    System.out.println("empty");
-                }
+                visibles.depiler();
                 tmp.empiler( carte );
 
                 // le tas de carte intermediaire est dans le mauvais sens donc
                 // on le retourne
-                Carte tmpCarteBonSens = tmp.getSommet();
-                while ( tmp.isVide() )
+                while(!tmp.isVide())
                 {
-                    tmpCarteBonSens = tmp.getSommet();
+                    Carte c = tmp.getSommet();
                     tmp.depiler();
-                    tmpTasBonSens.empiler( tmpCarteBonSens );
-                }
-
-                p.c2p_debutDnDValide( tmpTasBonSens.getPresentation() );
+                    tmp2.empiler( c );
+                }                
+                
+                p.c2p_debutDnDValide( tmp2.getPresentation() );
             }
             catch ( Exception e )
             {
-                e.printStackTrace();
+                System.out.println( "empty" );
             }
         }
         else
@@ -104,9 +100,29 @@ public class CColonne extends Colonne
         }
     }
 
-    public void p2c_finDnDDrag( CTasDeCarte selectedControl, boolean dropSuccess )
+    public void p2c_finDnDDrag( CTasDeCarte tasTemp, boolean dropSuccess )
     {
-
+        if(!dropSuccess)
+        {
+            CTasDeCarte tasAlEndroi=new CTasDeCarte( "temp", new CUsine() );
+            while(!tasTemp.isVide())
+            {
+                Carte c = null;
+                try
+                {
+                    c = tasTemp.getSommet();
+                    tasTemp.depiler();
+                    tasAlEndroi.empiler( c );                    
+                }
+                catch ( Exception e )
+                {
+                    System.out.println("erreur pour rempiler les cartes en cours de déplacement");
+                    return;
+                }                
+            }
+            visibles.empiler( tasAlEndroi );
+        }
+            
     }
 
     public void p2c_DragEnter( CTasDeCarte tas )
@@ -115,21 +131,21 @@ public class CColonne extends Colonne
         {
             tas.getPresentation().c2p_isEmpilable();
         }
-        else 
+        else
             tas.getPresentation().c2p_isNotEmpilable();
     }
 
     public void finDnDDrop( CTasDeCarte tas )
     {
-                if ( isEmpilable( tas ) )
-                {
-                    empiler( tas );
-                    p.finDnDValide();
-                }
-                else
-                {
-                    p.finDnDInvalid();
-                }      
+        if ( isEmpilable( tas ) )
+        {
+            empiler( tas );
+            p.finDnDValide();
+        }
+        else
+        {
+            p.finDnDInvalid();
+        }
 
     }
 

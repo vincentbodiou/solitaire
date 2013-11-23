@@ -17,15 +17,15 @@ import solitaire.controleur.CCarte;
  */
 public class PCarte extends JPanel implements Transferable{
 
-    protected CCarte controle ;		// contrôleur associé
-    public CCarte getControle()
+    protected CCarte controleur ;		// contrôleur associé
+    public CCarte getControleur()
     {
-        return controle;
+        return controleur;
     }
 
     public void setControle( CCarte controle )
     {
-        this.controle = controle;
+        this.controleur = controle;
     }
 
     protected JLabel face, dos ;
@@ -39,7 +39,7 @@ public class PCarte extends JPanel implements Transferable{
      */
     public PCarte (final String chaine, final CCarte controle) {
     //public PCarte (final String chaine) {
-	this.controle = controle ;
+	this.controleur = controle ;
 
 	// image de la face 
 	icone = new ImageIcon(ClassLoader.getSystemResource(chaine + ".gif"));

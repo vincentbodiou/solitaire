@@ -1,4 +1,5 @@
 package solitaire.presentation;
+
 //rendu au drag Enter
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -30,11 +31,13 @@ import listener.MyDragSourceListener;
 import solitaire.application.Colonne;
 import solitaire.presentation.PCarte;
 import solitaire.presentation.PSabot.SabotDragGestureListener;
+import solitaire.presentation.PSabot.SabotDragSourceListener;
 import solitaire.presentation.PSabot.SabotDragSourceMotionListener;
 import solitaire.application.Usine;
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CColonne;
 import solitaire.controleur.CTasDeCarte;
+import solitaire.controleur.CTasDeCarteAlterne;
 
 public class PColonne extends JPanel
 {
@@ -56,14 +59,14 @@ public class PColonne extends JPanel
 
     protected DragGestureEvent theInitialEvent = null;
 
-    private PTasDeCarte selected;
+    private PCarte selected;
 
-    private CTasDeCarte selectedControl;
+    private CCarte selectedControl;
 
     private Point dragOrigin = null;
-    
+
     private PTasDeCarte Tastemporaire;
-    
+
     private JFrame dragFrame = null;
 
     protected class ColonneDragSourceMotionListener implements DragSourceMotionListener
@@ -74,12 +77,12 @@ public class PColonne extends JPanel
         {
             int parentX = getRootPane().getParent().getX();
             int parentY = getRootPane().getParent().getY();
-            int eventX = evt.getLocation().x+5;
-            int eventY = evt.getLocation().y-5;
+            int eventX = evt.getLocation().x + 5;
+            int eventY = evt.getLocation().y - 5;
             dragFrame.setLocation( eventX - parentX, eventY - parentY );
             repaint();
         }
-       
+
     }
 
     public class ColonneDragSourceListener extends MyDragSourceListener
@@ -87,7 +90,8 @@ public class PColonne extends JPanel
         @Override
         public void dragDropEnd( DragSourceDropEvent event )
         {
-            controlleur.p2c_finDnDDrag( selectedControl, event.getDropSuccess() );
+            controlleur.p2c_finDnDDrag( Tastemporaire.getControleur(), event.getDropSuccess() );
+            dragFrame.setVisible( false );
             repaint();
         }
     }
@@ -104,8 +108,11 @@ public class PColonne extends JPanel
             dragOrigin = dge.getDragOrigin();
             try
             {
-                selected = (PTasDeCarte) getComponentAt( dragOrigin );
-               selectedControl = selected.getControleur();
+                selected = (PCarte) tasVisible.getComponentAt( dragOrigin );
+                selectedControl = selected.getControleur();
+                System.out.println( "LALALALAL" );
+                // System.out.println(selectedControl.getNombre() + " point " +
+                // dragOrigin);
             }
             catch ( Exception e )
             {
@@ -113,31 +120,31 @@ public class PColonne extends JPanel
             }
             controlleur.p2c_debutDnDDrag( selectedControl );
         }
+    }
 
-    }   
-    
-    
-    public void c2p_debutDnDValide(PTasDeCarte tmp)
+    public void c2p_debutDnDValide( PTasDeCarte tmp )
     {
-       Tastemporaire = tmp;  
-       dragSource.startDrag( theInitialEvent, DragSource.DefaultMoveNoDrop, selected, myDragSourceListener );
-       
-       dragFrame = new JFrame();
-       dragFrame.add( Tastemporaire );                
-       dragFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Already there
-       dragFrame.setExtendedState(JFrame.MAXIMIZED_BOTH);
-       dragFrame.setUndecorated(true);
-       dragFrame.setVisible( true );
-       dragFrame.pack();
-       repaint();
+        Tastemporaire = tmp;
+        dragSource.startDrag( theInitialEvent, DragSource.DefaultMoveNoDrop, tmp, myDragSourceListener );
+
+        dragFrame = new JFrame();
+
+        dragFrame.add( tmp );
+        dragFrame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE ); // Already
+                                                                    // there
+        dragFrame.setExtendedState( JFrame.MAXIMIZED_BOTH );
+        dragFrame.setUndecorated( true );
+        dragFrame.setVisible( true );
+        dragFrame.pack();
+        repaint();
     }
 
     public void c2p_debutDnDInvalide()
     {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
     public PColonne( CColonne c )
     {
         this.setControlleur( c );
@@ -147,7 +154,7 @@ public class PColonne extends JPanel
         add( tasCachee );
         add( tasVisible );
         dropTarget = new DropTarget( this, new MyDropTargetListener() );
-
+        myDragSourceListener = new ColonneDragSourceListener();
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer( tasVisible, DnDConstants.ACTION_MOVE, new ColonneDragGestureListener() );
         dragSource.addDragSourceMotionListener( new ColonneDragSourceMotionListener() );
@@ -183,7 +190,7 @@ public class PColonne extends JPanel
                 {
                     event.acceptDrag( DnDConstants.ACTION_MOVE );
                     pTas = (PTasDeCarte) transferable.getTransferData( new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType ) );
-                    controlleur.p2c_DragEnter(pTas.getControleur());
+                    controlleur.p2c_DragEnter( pTas.getControleur() );
                 }
             }
             catch ( java.io.IOException exception )
@@ -214,7 +221,7 @@ public class PColonne extends JPanel
         public void drop( DropTargetDropEvent dtde )
         {
             theFinalEvent = dtde;
-            controlleur.finDnDDrop( (CTasDeCarte) pTas.getControleur());
+            controlleur.finDnDDrop( (CTasDeCarte) pTas.getControleur() );
         }
 
         @Override
@@ -254,9 +261,5 @@ public class PColonne extends JPanel
     {
         this.tasCachee = tasCachee;
     }
-
-
-
-   
 
 }

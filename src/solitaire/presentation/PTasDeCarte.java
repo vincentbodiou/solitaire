@@ -115,20 +115,32 @@ public class PTasDeCarte extends JPanel implements Transferable
     @Override
     public Object getTransferData( DataFlavor flavor ) throws UnsupportedFlavorException, IOException
     {
-        return this;
+        Object result = null;
+        if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+            result = this;
+        }
+        return (result);
     }
 
     @Override
     public DataFlavor[] getTransferDataFlavors()
     {
-        // TODO Auto-generated method stub
-        return null;
+        DataFlavor data[] = new DataFlavor[1];
+        try {
+            data[0] = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType);
+        } catch (java.lang.ClassNotFoundException e) {
+        }
+        return (data);
     }
 
     @Override
     public boolean isDataFlavorSupported( DataFlavor flavor )
     {
-        return true;
+        boolean result = false;
+        if (flavor.isMimeTypeEqual(DataFlavor.javaJVMLocalObjectMimeType)) {
+            result = true;
+        }
+        return (result);
     }
 
    

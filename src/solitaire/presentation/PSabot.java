@@ -98,7 +98,7 @@ public class PSabot extends JPanel
             try
             {
                 selected = (PCarte) visible.getComponentAt( dragOrigin );
-                selectedControl = (CCarte) selected.getControle();
+                selectedControl = (CCarte) selected.getControleur();
             }
             catch ( Exception e )
             {
@@ -115,7 +115,7 @@ public class PSabot extends JPanel
         @Override
         public void dragDropEnd( DragSourceDropEvent evt )
         {
-            controleur.p2c_finDnDDrag( selected.getControle(), evt.getDropSuccess() );
+            controleur.p2c_finDnDDrag( selected.getControleur(), evt.getDropSuccess() );
             dragFrame.setVisible( false );
             repaint();
         }
@@ -125,36 +125,6 @@ public class PSabot extends JPanel
         {
             evt.getDragSourceContext().setCursor( new Cursor( Cursor.MOVE_CURSOR ) );
         }
-    }
-
-    public CSabot getControleur()
-    {
-        return controleur;
-    }
-
-    public void setControleur( CSabot controleur )
-    {
-        this.controleur = controleur;
-    }
-
-    public PTasDeCarte getReserve()
-    {
-        return reserve;
-    }
-
-    public void setReserve( PTasDeCarte reserve )
-    {
-        this.reserve = reserve;
-    }
-
-    public PTasDeCarte getVisible()
-    {
-        return visible;
-    }
-
-    public void setVisible( PTasDeCarte visible )
-    {
-        this.visible = visible;
     }
 
     private class RetournerCarteSabot extends ClickListener
@@ -198,6 +168,38 @@ public class PSabot extends JPanel
     {
         theFinalEvent.rejectDrop();
     }
+    
+    public CSabot getControleur()
+    {
+        return controleur;
+    }
+
+    public void setControleur( CSabot controleur )
+    {
+        this.controleur = controleur;
+    }
+
+    public PTasDeCarte getReserve()
+    {
+        return reserve;
+    }
+
+    public void setReserve( PTasDeCarte reserve )
+    {
+        this.reserve = reserve;
+    }
+
+    public PTasDeCarte getVisible()
+    {
+        return visible;
+    }
+
+    public void setVisible( PTasDeCarte visible )
+    {
+        this.visible = visible;
+    }
+
+   
     
     
 }

@@ -1,12 +1,16 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.Transferable;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 
 import javax.swing.JPanel;
 
 import solitaire.controleur.CTasDeCarteAlterne;
 
-public class PTasDeCarteAlterne extends JPanel
+public class PTasDeCarteAlterne extends JPanel implements Transferable
 {
   private int Xoffset;
   private int Yoffset;
@@ -75,5 +79,26 @@ public class PTasDeCarteAlterne extends JPanel
   public void setYoffset(int yoffset) {
       Yoffset = yoffset;
   }
+
+@Override
+public Object getTransferData( DataFlavor flavor ) throws UnsupportedFlavorException, IOException
+{
+    // TODO Auto-generated method stub
+    return this;
+}
+
+@Override
+public DataFlavor[] getTransferDataFlavors()
+{
+    // TODO Auto-generated method stub
+    return null;
+}
+
+@Override
+public boolean isDataFlavorSupported( DataFlavor flavor )
+{
+    // TODO Auto-generated method stub
+    return true;
+}
 
 }
