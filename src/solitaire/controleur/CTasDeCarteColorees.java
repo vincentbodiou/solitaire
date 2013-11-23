@@ -4,13 +4,14 @@ import java.awt.Component;
 
 import javax.swing.JFrame;
 
+import solitaire.DnD.IControleurDnD;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
 import solitaire.presentation.*;
 import solitaire.usine.CUsine;
 
-public class CTasDeCarteColorees extends TasDeCartesColorees
+public class CTasDeCarteColorees extends TasDeCartesColorees implements IControleurDnD
 {
     private PTasDeCarteColoree p;
 
@@ -86,20 +87,40 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
-    public void debutDnDDrag( CCarte selectedControl )
+    @Override
+    public void p2c_debutDnDDrag( CCarte carte )
     {
-              
+        CTasDeCarte tas = new CTasDeCarte( "temp", new CUsine() );
+        if(carte != null)
+        {
+            try
+            {
+                if(this.getSommet()==carte)
+                {
+                    depiler();   
+                    tas.empiler( carte );
+                    p.c2p_debutDnDValide(tas.getPresentation());
+                }
+            }
+            catch ( Exception e )
+            {
+                e.printStackTrace();
+            }
+        } else {
+            p.c2p_debutDnDInvalide();            
+        }
     }
 
-
-    public void p2c_finDnDDrag( CCarte carte, boolean dropSuccess )
+    @Override
+    public void p2c_finDnDDrag( CTasDeCarte tas, boolean dropSuccess )
     {
         if(!dropSuccess)
-        {          
-            empiler( carte );
+        {              
+            empiler( tas );
         }            
     }
 
+    @Override
     public void p2c_DragEnter( CTasDeCarte tas )
     {
         if ( isEmpilable( tas ) )
@@ -110,6 +131,7 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
             tas.getPresentation().c2p_isNotEmpilable();
     }
 
+    @Override
     public void finDnDDrop( CTasDeCarte tas )
     {
         try

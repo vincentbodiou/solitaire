@@ -9,4 +9,6 @@ public interface IControleurDnD
     public abstract void p2c_finDnDDrag( CTasDeCarte tasTemp, boolean dropSuccess );
     public abstract void p2c_DragEnter( CTasDeCarte tas );
     public abstract void finDnDDrop( CTasDeCarte tas );
+    
+    
 }

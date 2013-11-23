@@ -78,10 +78,10 @@ public class CSabot extends Sabot implements IControleurDnD
     
     
     @Override
-    public void p2c_finDnDDrag( CTasDeCarte carte, boolean dropSuccess )
+    public void p2c_finDnDDrag( CTasDeCarte tas, boolean dropSuccess )
     {
         if(!dropSuccess)
-            empiler(carte);
+            empiler(tas);
     }
     
     @Override

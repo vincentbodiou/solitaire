@@ -19,136 +19,34 @@ import java.awt.dnd.DropTargetListener;
 import javax.swing.JPanel;
 
 import listener.ADragSourceListener;
+import solitaire.DnD.ADnD;
 import solitaire.controleur.*;
 
 
-public class PTasDeCarteColoree extends JPanel
+public class PTasDeCarteColoree extends ADnD
 {
-    @SuppressWarnings( "unused" )
-    private CTasDeCarteColorees controleur;
-
     private static final long serialVersionUID = 1L;
 
     private int Xoffset;
 
     private int Yoffset;
     
-    private DragSource dragSource = null;
-
-    private ColorDragSourceListener myDragSourceListener = null;
     
-    private DragGestureEvent theInitialEvent;
 
-    private DropTargetDropEvent theFinalEvent;
+    
+   
 
-    private DropTarget dropTarget = null;
-
-    private PCarte selected;
-
-    private CCarte selectedControl;
-
-    private Point DragOrigin;
-
-    class ColorDragGestureListener implements DragGestureListener
-    {
-
-        @Override
-        public void dragGestureRecognized( DragGestureEvent evt )
-        {
-            selected = null;
-            selectedControl = null;
-            theInitialEvent = evt;
-            DragOrigin = evt.getDragOrigin();
-            try
-            {
-                selected = (PCarte) getComponentAt( DragOrigin );
-                selectedControl = selected.getControleur();
-            }
-            catch ( Exception e )
-            {
-            }
-            controleur.debutDnDDrag( selectedControl );
-        }
-    }
-
-    class ColorDragSourceListener extends ADragSourceListener
-    {
-        @Override
-        public void dragDropEnd( DragSourceDropEvent evt )
-        {
-            controleur.p2c_finDnDDrag( selectedControl, evt.getDropSuccess() );
-            repaint();
-        }
-    }
-
-    class ColorDropTargetListener implements DropTargetListener
-    {
-        protected PTasDeCarte pTas = null;
-
-            @Override
-            public void dragEnter( DropTargetDragEvent event )
-            {
-                try
-                {
-                    Transferable transferable = event.getTransferable();
-                    if ( transferable.isDataFlavorSupported( new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType ) ) )
-                    {
-                        event.acceptDrag( DnDConstants.ACTION_MOVE );
-                        pTas = (PTasDeCarte) transferable.getTransferData( new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType ) );
-                        controleur.p2c_DragEnter( pTas.getControleur() );
-                    }
-                }
-                catch ( java.io.IOException exception )
-                {
-                }
-                catch ( UnsupportedFlavorException ufException )
-                {
-                }
-                catch ( java.lang.ClassNotFoundException e )
-                {
-                }
-            }
-
-            @Override
-            public void dragExit( DropTargetEvent dte )
-            {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void dragOver( DropTargetDragEvent dtde )
-            {
-                // TODO Auto-generated method stub
-                
-            }
-
-            @Override
-            public void drop( DropTargetDropEvent dtde )
-            {
-                theFinalEvent = dtde;
-                controleur.finDnDDrop( (CTasDeCarte) pTas.getControleur() );
-            }
-
-
-            @Override
-            public void dropActionChanged( DropTargetDragEvent dtde )
-            {
-                // TODO Auto-generated method stub
-                
-            }
-    }
 
     public PTasDeCarteColoree( CTasDeCarteColorees c )
     {
         super();
-        this.controleur = c;
+        this.controlleur = c;
         setLayout( null );
         
-        myDragSourceListener = new ColorDragSourceListener();
+        myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
-        dragSource.createDefaultDragGestureRecognizer( this, DnDConstants.ACTION_MOVE, new ColorDragGestureListener() );
-        dropTarget = new DropTarget(this, new ColorDropTargetListener());
+        dragSource.createDefaultDragGestureRecognizer( this, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
+        dropTarget = new DropTarget(this, new MyDropTargetListener());
         
         
         setSize( PCarte.largeur, PCarte.hauteur );
@@ -184,17 +82,17 @@ public class PTasDeCarteColoree extends JPanel
 
     private int getNbCard()
     {
-        return controleur.getNombre();
+        return ((CTasDeCarteColorees)controlleur).getNombre();
     }
 
     public CTasDeCarteColorees getControleur()
     {
-        return controleur;
+        return ((CTasDeCarteColorees)controlleur);
     }
 
     public void setControleur( CTasDeCarteColorees controleur )
     {
-        this.controleur = controleur;
+        this.controlleur = controleur;
     }
 
     public int getXoffset()
@@ -215,18 +113,7 @@ public class PTasDeCarteColoree extends JPanel
     public void setYoffset( int yoffset )
     {
         Yoffset = yoffset;
-    }
-    
-    public void finDnDValide()
-    {
-        theFinalEvent.acceptDrop( DnDConstants.ACTION_MOVE );
-        theFinalEvent.getDropTargetContext().dropComplete( true );
-        repaint();
-    }
-    
-    public void finDnDInvalid()
-    {
-        theFinalEvent.rejectDrop();
-    }
+    }    
+   
 
 }
