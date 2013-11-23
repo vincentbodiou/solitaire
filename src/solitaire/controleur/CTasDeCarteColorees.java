@@ -86,7 +86,50 @@ public class CTasDeCarteColorees extends TasDeCartesColorees
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
+    public void debutDnDDrag( CCarte selectedControl )
+    {
+              
+    }
 
-   
+
+    public void p2c_finDnDDrag( CCarte carte, boolean dropSuccess )
+    {
+        if(!dropSuccess)
+        {          
+            empiler( carte );
+        }            
+    }
+
+    public void p2c_DragEnter( CTasDeCarte tas )
+    {
+        if ( isEmpilable( tas ) )
+        {
+            tas.getPresentation().c2p_isEmpilable();
+        }
+        else
+            tas.getPresentation().c2p_isNotEmpilable();
+    }
+
+    public void finDnDDrop( CTasDeCarte tas )
+    {
+        try
+        {
+            if ( isEmpilable( tas.getSommet() ) )
+            {
+                empiler( tas );
+                p.finDnDValide();
+            }
+            else
+            {
+                p.finDnDInvalid();
+            }
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+    }
 
 }
