@@ -35,6 +35,11 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
             System.out.println("impossible d'empiler sur le tas de carte coloree");
     }
     
+    public int getCouleur()
+    {
+        return couleur;
+    }
+    
     public PTasDeCarteColoree getPresentation()
     {
         return p;
