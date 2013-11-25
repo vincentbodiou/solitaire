@@ -44,17 +44,13 @@ public class P4TasColoree extends JPanel
         {
             add( tab[i].getPresentation() );
         }
-        tab[0].getPresentation().setBackground( Color.blue );
-        tab[1].getPresentation().setBackground( Color.gray );
-        tab[2].getPresentation().setBackground( Color.magenta );
-        tab[3].getPresentation().setBackground( Color.orange );
         
         GridLayout gridTasColoree = new GridLayout( 0, 1 );
         setLayout( gridTasColoree );
 
         setSize( LARGEUR, HAUTEUR );
         setPreferredSize( getSize() );
-        setBackground( Color.white );
+        setBackground(new Color(13, 131, 53)); // vert
         setVisible( true );
     }
 

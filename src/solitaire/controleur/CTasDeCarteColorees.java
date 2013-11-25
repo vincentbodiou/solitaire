@@ -135,6 +135,12 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
         else
             tas.getPresentation().c2p_isNotEmpilable();
     }
+    
+    @Override
+    public void p2c_DragExit( CTasDeCarte tas )
+    {
+        tas.getPresentation().c2p_resetColor();        
+    }
 
     @Override
     public void finDnDDrop( CTasDeCarte tas )
@@ -158,5 +164,7 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
         }
 
     }
+
+   
 
 }

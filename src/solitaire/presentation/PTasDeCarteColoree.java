@@ -67,7 +67,7 @@ public class PTasDeCarteColoree extends ADnD
         
         setSize( PCarte.largeur, PCarte.hauteur );
         setPreferredSize( getSize() );
-              
+        setBackground(new Color(13, 131, 53)); // vert      
     }
     
     @Override

@@ -20,7 +20,7 @@ import solitaire.usine.CUsine;
 public class PSolitaire extends JFrame
 {
     public static int LARGEUR = 800;
-    public static int HAUTEUR = 1000;
+    public static int HAUTEUR = 600;
     private static final long serialVersionUID = 1L;
     private CSolitaire controleur;
       
@@ -43,28 +43,12 @@ public class PSolitaire extends JFrame
         PSabot pSabot = controleur.getcSabot().getPresentation();
         P4TasColoree p4c = controleur.getTasColorees();
 
-       add(p7c, BorderLayout.CENTER);
-       add(pSabot, BorderLayout.NORTH);
-       add(p4c, BorderLayout.WEST);
-        /*GridBagConstraints c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 0;
-        c.fill = GridBagConstraints.HORIZONTAL;
+       
         
-        pSabot.setPreferredSize( pSabot.getSize() );
-        getContentPane().add( pSabot, c );
+       getContentPane().add(p7c, BorderLayout.CENTER);
+       getContentPane(). add(pSabot, BorderLayout.NORTH);
+       getContentPane().add(p4c, BorderLayout.WEST);
 
-        c.gridx = 0;
-        c.gridy = 1;
-        p7c.setMinimumSize( p7c.getMinimumSize() );
-        getContentPane().add( p7c, c );
-
-        c.gridx = 1;
-        c.gridy = 0;
-        c.gridheight = 2;
-        c.fill = GridBagConstraints.VERTICAL;
-        p4c.setMinimumSize( p4c.getMinimumSize() );
-        getContentPane().add( p4c, c,0 );*/
 
         setSize( LARGEUR, HAUTEUR );
         setPreferredSize( getSize() );

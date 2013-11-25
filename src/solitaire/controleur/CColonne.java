@@ -116,10 +116,19 @@ public class CColonne extends Colonne implements IControleurDnD
     {
         if ( isEmpilable( tas ) )
         {
-            tas.getPresentation().c2p_isEmpilable();
+            p.color_isEmpilable();
         }
         else
-            tas.getPresentation().c2p_isNotEmpilable();
+        {
+            System.out.println("iici");
+            p.color_isNotEmpilable();
+        }
+    }
+    
+    @Override
+    public void p2c_DragExit( CTasDeCarte tas )
+    {
+       p.color_resetColor();
     }
 
     @Override
@@ -133,7 +142,7 @@ public class CColonne extends Colonne implements IControleurDnD
         else
         {
             p.finDnDInvalid();
-        }
+        }       
 
     }
 

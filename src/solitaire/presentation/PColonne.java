@@ -2,11 +2,15 @@ package solitaire.presentation;
 
 //rendu au drag Enter
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
+import java.awt.event.MouseEvent;
 
+import listener.ClickListener;
 import solitaire.DnD.ADnD;
 import solitaire.controleur.CColonne;
 
@@ -28,6 +32,8 @@ public class PColonne extends ADnD
         composantContainDragger = tasVisible;
         add( tasCachee );
         add( tasVisible );
+        tasCachee.setBackground(new Color(13, 131, 53)); // vert
+        tasVisible.setBackground(new Color(13, 131, 53)); // vert
         dropTarget = new DropTarget( this, new MyDropTargetListener() );
         myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
@@ -36,9 +42,30 @@ public class PColonne extends ADnD
         setPreferredSize( getSize() );
         setSize( getSize() );
         setVisible( true );
-        setBackground( Color.red );
+        setBackground(new Color(13, 131, 53)); // vert
+        
+        tasCachee.addMouseListener( new RetournerCarteColonne() );
+        tasCachee.setFond( Toolkit.getDefaultToolkit().createImage(".\\ressources\\cartevide.png"));
+        
     }
     
+    private class RetournerCarteColonne extends ClickListener
+    {
+        @Override
+        public void mouseClicked( MouseEvent e )
+        {
+            try
+            {
+                ((CColonne)controlleur).retournerCarte();
+                repaint();
+                
+            }
+            catch ( Exception e1 )
+            {
+                e1.printStackTrace();
+            }
+        }
+    }     
 
     public CColonne getControlleur()
     {
@@ -69,5 +96,7 @@ public class PColonne extends ADnD
     {
         this.tasCachee = tasCachee;
     }
+
+    
 
 }

@@ -1,5 +1,6 @@
 package solitaire.DnD;
 
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Point;
 import java.awt.datatransfer.DataFlavor;
@@ -10,10 +11,12 @@ import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDragEvent;
 import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceEvent;
 import java.awt.dnd.DragSourceMotionListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
+import java.awt.dnd.DropTargetEvent;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -40,20 +43,22 @@ public abstract class ADnD extends JPanel
     protected PCarte selected;
 
     protected CCarte selectedControl;
-    
+
     protected Point dragOrigin = null;
 
     protected PTasDeCarte Tastemporaire;
 
     protected JFrame dragFrame = null;
-    
+
     protected IControleurDnD controlleur;
-    
+
     protected JPanel composantContainDragger;
-    
+
     protected class MyDragGestureListener implements DragGestureListener
     {
-        public MyDragGestureListener(){}
+        public MyDragGestureListener()
+        {
+        }
 
         @Override
         public void dragGestureRecognized( DragGestureEvent dge )
@@ -71,14 +76,19 @@ public abstract class ADnD extends JPanel
             {
                 e.printStackTrace();
             }
-            if(controlleur==null ) System.out.println("control NULLL");
+            if ( controlleur == null )
+                System.out.println( "control NULLL" );
             controlleur.p2c_debutDnDDrag( selectedControl );
         }
     }
+
+   
     
     protected class MyDragSourceListener extends ADragSourceListener
     {
-        public MyDragSourceListener(){}
+        public MyDragSourceListener()
+        {
+        }
 
         @Override
         public void dragDropEnd( DragSourceDropEvent event )
@@ -87,20 +97,26 @@ public abstract class ADnD extends JPanel
             dragFrame.setVisible( false );
             repaint();
         }
-        
+
+        @Override
+        public void dragExit( DragSourceEvent arg0 )
+        {
+        }
+
         @Override
         public void dragEnter( DragSourceDragEvent evt )
         {
+           
             evt.getDragSourceContext().setCursor( new Cursor( Cursor.MOVE_CURSOR ) );
         }
     }
-    
-    
+
     protected class MyDragSourceMotionListener implements DragSourceMotionListener
     {
 
-        public MyDragSourceMotionListener(){}       
-        
+        public MyDragSourceMotionListener()
+        {
+        }
 
         @Override
         public void dragMouseMoved( DragSourceDragEvent evt )
@@ -113,17 +129,19 @@ public abstract class ADnD extends JPanel
             repaint();
         }
     }
-    
+
     protected class MyDropTargetListener extends ADropTargetListener
     {
         protected PTasDeCarte pTas = null;
 
-        public MyDropTargetListener() {     
+        public MyDropTargetListener()
+        {
         }
 
         @Override
         public void dragEnter( DropTargetDragEvent event )
-        {
+        {           
+            
             try
             {
                 Transferable transferable = event.getTransferable();
@@ -131,21 +149,28 @@ public abstract class ADnD extends JPanel
                 {
                     event.acceptDrag( DnDConstants.ACTION_MOVE );
                     pTas = (PTasDeCarte) transferable.getTransferData( new DataFlavor( DataFlavor.javaJVMLocalObjectMimeType ) );
-                    controlleur.p2c_DragEnter( pTas.getControleur() );
+                    controlleur.p2c_DragEnter( pTas.getControleur() );                    
                 }
+                
             }
-            catch ( Exception e)
-            {}
+            catch ( Exception e )
+            {
+            }
         }
         
+        @Override
+        public void dragExit( DropTargetEvent event ){
+            controlleur.p2c_DragExit( pTas.getControleur() );  
+        }
+
         @Override
         public void drop( DropTargetDropEvent dtde )
         {
             theFinalEvent = dtde;
             controlleur.finDnDDrop( (CTasDeCarte) pTas.getControleur() );
-        }     
+        }
     }
-    
+
     public void c2p_debutDnDValide( PTasDeCarte tmp )
     {
         Tastemporaire = tmp;
@@ -162,24 +187,41 @@ public abstract class ADnD extends JPanel
         dragFrame.pack();
         repaint();
     }
-    
+
     public void c2p_debutDnDInvalide()
     {
-      
-    }    
-    
-    
+        
+    }
+
     public void finDnDValide()
     {
         theFinalEvent.acceptDrop( DnDConstants.ACTION_MOVE );
         theFinalEvent.getDropTargetContext().dropComplete( true );
         repaint();
+        color_resetColor();
     }
 
     public void finDnDInvalid()
     {
         theFinalEvent.rejectDrop();
+        color_resetColor();
+        
     }
     
+    public void color_isEmpilable()
+    {        
+        composantContainDragger.setBackground( Color.green );        
+    }
     
+    public void color_resetColor()
+    {
+        composantContainDragger.setBackground(new Color(13, 131, 53)); // vert
+    }
+
+    public void color_isNotEmpilable()
+    {
+        composantContainDragger.setBackground( Color.red );
+        
+    }
+
 }

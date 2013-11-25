@@ -32,6 +32,7 @@ public class CSabot extends Sabot implements IControleurDnD
 
         p = new PSabot( this );
         tasVisible.getPresentation().setXoffset( XOffset );
+        
     }
 
     public void retournerCarte() throws Exception
@@ -41,13 +42,14 @@ public class CSabot extends Sabot implements IControleurDnD
             super.retournerCarte();
         else
             super.retourner();
-            
+        p.repaint();
     }
 
     public void retourner() throws Exception
     {
         if ( isRetournable() ){
-            super.retourner();            
+            super.retourner();
+            
         }
     }
     
@@ -86,6 +88,13 @@ public class CSabot extends Sabot implements IControleurDnD
     
     @Override
     public void p2c_DragEnter( CTasDeCarte tas )
+    {
+        // TODO Auto-generated method stub
+        
+    }
+    
+    @Override
+    public void p2c_DragExit( CTasDeCarte controleur )
     {
         // TODO Auto-generated method stub
         
@@ -159,5 +168,7 @@ public class CSabot extends Sabot implements IControleurDnD
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 
     }
+
+   
 
 }

@@ -2,6 +2,8 @@ package solitaire.presentation;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -24,25 +26,35 @@ public class PTasDeCarte extends JPanel implements Transferable
     private int Xoffset;
 
     private int Yoffset;
+    
+    private Image fond;
 
     public PTasDeCarte( String nom, Usine usine, CTasDeCarte cTasDeCarte )
     {
         super();
         this.controleur = cTasDeCarte;
         setLayout( null );
-        setBackground( Color.green );
+        setBackground(new Color(13, 131, 53)); // vert
     }
 
     public void c2p_isNotEmpilable()
     {
         setBackground( Color.red );
     }
+    
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        if(fond != null)
+        g.drawImage(fond, 0, 0, null); // see javadoc for more info on the parameters
+        repaint();
+    }
 
     public void c2p_isEmpilable()
     {
-        setBackground( Color.yellow );
-        
+        setBackground( Color.yellow );        
     }
+    
     public void empiler( PCarte pCard )
     {
         System.out.println( "empiler de PTasDeCarte" );
@@ -141,6 +153,17 @@ public class PTasDeCarte extends JPanel implements Transferable
             result = true;
         }
         return (result);
+    }
+
+    public void setFond( Image image )
+    {
+        fond=image;
+        
+    }
+
+    public void c2p_resetColor()
+    {
+        setBackground(new Color(13, 131, 53)); // vert        
     }
 
    

@@ -28,6 +28,11 @@ public class CCarte extends Carte{
         return (PCarte) p;
     }
     
+    public void doubleclick()
+    {
+        
+    }
+    
     /**
 	 * Test d'affichage d'une carte
 	 * @param args
@@ -49,5 +54,7 @@ public class CCarte extends Carte{
 		frame.setLocationRelativeTo(frame.getParent());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+    
 
 }

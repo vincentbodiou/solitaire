@@ -60,6 +60,9 @@ public class PCarte extends JPanel implements Transferable{
 	setSize (face.getSize ()) ;
 	setPreferredSize (getSize ()) ;
 	setFaceVisible(false);
+	
+	
+	
     } // constructeur
 
     /**
