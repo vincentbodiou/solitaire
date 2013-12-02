@@ -1,9 +1,8 @@
 package solitaire.DnD;
 
-import java.awt.dnd.DropTargetEvent;
-
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarte;
+import solitaire.controleur.CTasDeCarteAlterne;
 
 public interface IControleurDnD
 {
@@ -12,7 +11,6 @@ public interface IControleurDnD
     public abstract void p2c_DragEnter( CTasDeCarte tas );
     public abstract void finDnDDrop( CTasDeCarte tas );
     public abstract void p2c_DragExit( CTasDeCarte controleur );
-    
-    
+    public abstract void callDoubleClickCommand(Object tas);
 }
 

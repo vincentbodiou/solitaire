@@ -1,18 +1,17 @@
 package solitaire.controleur;
 
 import javax.swing.JFrame;
-import javax.swing.RepaintManager;
-
 import solitaire.DnD.IControleurDnD;
 import solitaire.application.Carte;
 import solitaire.application.Colonne;
 import solitaire.application.Usine;
+import solitaire.command.ICommand;
+import solitaire.command.IDoubleClick;
 import solitaire.presentation.PColonne;
 import solitaire.usine.CUsine;
 
-public class CColonne extends Colonne implements IControleurDnD
+public class CColonne extends Colonne implements IControleurDnD, IDoubleClick
 {
-
     private static int YOffsetAlt = 30;
 
     private static int YOffsetCache = 10;
@@ -24,6 +23,9 @@ public class CColonne extends Colonne implements IControleurDnD
     private CTasDeCarteAlterne tasVisible;
 
     private PColonne p;
+    
+    private ICommand command;
+    
 
     public CColonne( String nom, Usine usine )
     {
@@ -37,6 +39,32 @@ public class CColonne extends Colonne implements IControleurDnD
         p.getTasVisible().setYoffset( YOffsetAlt );
     }
 
+    @Override
+    public void setDoubleClickCommand( ICommand cmd )
+    {
+        command = cmd;
+    }
+
+    @Override
+    public void callDoubleClickCommand( Object tasDeCarte )
+    {        
+        try
+        {
+            CTasDeCarteAlterne tas = (CTasDeCarteAlterne)tasDeCarte;
+            CCarte c = (CCarte) tas.getSommet() ;
+
+            if(command.execute( c ))
+            {
+                tasVisible.depiler();
+            }
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }            
+    }
+    
     @Override
     public void retournerCarte() throws Exception
     {
@@ -206,5 +234,9 @@ public class CColonne extends Colonne implements IControleurDnD
         frame.setLocationRelativeTo( frame.getParent() );
         frame.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
     }
+
+   
+
+   
 
 }

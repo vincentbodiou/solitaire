@@ -1,7 +1,6 @@
 package solitaire.presentation;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
@@ -35,8 +34,8 @@ public class PSabot extends ADnD
         visible.setXoffset( 30 );
         visible.setLocation( PCarte.largeur + 20, 0 );
         
-        
         reserve.addMouseListener( new RetournerCarteSabot() );
+        visible.addMouseListener( new DoubleClickCarte() );
         myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer( visible, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
@@ -44,6 +43,22 @@ public class PSabot extends ADnD
         setBackground(new Color(13, 131, 53)); // vert
     }
    
+    public class DoubleClickCarte extends ClickListener
+    {
+        @Override
+        public void mouseClicked(MouseEvent event)
+        {
+          if (event.getClickCount() == 2) {             
+              PCarte selectedCarte = (PCarte) visible.getComponentAt( event.getX(), event.getY() );
+             
+              if(selectedCarte != null)
+              {
+                  controlleur.callDoubleClickCommand( ((PTasDeCarte)selectedCarte.getParent()).getControleur() );                  
+              }
+          }
+        }
+    } 
+    
     private class RetournerCarteSabot extends ClickListener
     {
         @Override

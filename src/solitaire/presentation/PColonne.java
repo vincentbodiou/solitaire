@@ -2,7 +2,6 @@ package solitaire.presentation;
 
 //rendu au drag Enter
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
@@ -43,11 +42,27 @@ public class PColonne extends ADnD
         setSize( getSize() );
         setVisible( true );
         setBackground(new Color(13, 131, 53)); // vert
-        
         tasCachee.addMouseListener( new RetournerCarteColonne() );
         tasCachee.setFond( Toolkit.getDefaultToolkit().createImage(".\\ressources\\cartevide.png"));
-        
+        tasVisible.addMouseListener( new DoubleClickCarte() );
     }
+    
+    public class DoubleClickCarte extends ClickListener
+    {
+        @Override
+        public void mouseClicked(MouseEvent event)
+        {
+          if (event.getClickCount() == 2) {             
+              PCarte selectedCarte = (PCarte) tasVisible.getComponentAt( event.getX(), event.getY() );
+             
+              if(selectedCarte != null)
+              {
+                  controlleur.callDoubleClickCommand( ((PTasDeCarteAlterne)selectedCarte.getParent()).getControleur() );                  
+              }
+          }
+        }
+    } 
+    
     
     private class RetournerCarteColonne extends ClickListener
     {

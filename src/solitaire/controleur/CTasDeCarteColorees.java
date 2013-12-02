@@ -35,6 +35,12 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
             System.out.println("impossible d'empiler sur le tas de carte coloree");
     }
     
+    @Override
+    public void callDoubleClickCommand( Object carte )
+    {// rien car déjà en place
+    }
+   
+    
     public int getCouleur()
     {
         return couleur;
@@ -165,6 +171,6 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
 
     }
 
-   
+  
 
 }

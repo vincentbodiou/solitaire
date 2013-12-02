@@ -1,19 +1,18 @@
 package solitaire.controleur;
 
-import java.awt.Point;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.tools.JavaFileManager.Location;
 
 import solitaire.DnD.IControleurDnD;
 import solitaire.application.Sabot;
 import solitaire.application.Usine;
+import solitaire.command.ICommand;
+import solitaire.command.IDoubleClick;
 import solitaire.presentation.PSabot;
 import solitaire.usine.CUsine;
 
-public class CSabot extends Sabot implements IControleurDnD
+public class CSabot extends Sabot implements IControleurDnD, IDoubleClick
 {
+    @SuppressWarnings( "unused" )
     private CSolitaire solitaire;
     
     private CTasDeCarte tasVisible;
@@ -23,6 +22,8 @@ public class CSabot extends Sabot implements IControleurDnD
     private PSabot p;
 
     private static int XOffset = 30;
+    
+    private ICommand command;
 
     public CSabot( String nom, Usine usine )
     {
@@ -169,6 +170,29 @@ public class CSabot extends Sabot implements IControleurDnD
 
     }
 
-   
+    @Override
+    public void setDoubleClickCommand( ICommand cmd )
+    {
+        command = cmd;
+    }
 
+    @Override
+    public void callDoubleClickCommand( Object tasDeCarte )
+    {        
+        try
+        {
+            CTasDeCarte tas = (CTasDeCarte) tasDeCarte;
+            CCarte c = (CCarte) tas.getSommet() ;
+
+            if(command.execute( c ))
+            {
+                tasVisible.depiler();
+            }
+        }
+        catch ( Exception e )
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }            
+    }
 }

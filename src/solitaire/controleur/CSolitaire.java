@@ -2,9 +2,10 @@ package solitaire.controleur;
 
 import solitaire.application.Solitaire;
 import solitaire.application.Usine;
+import solitaire.command.DoubleClickCommand;
+import solitaire.command.ICommand;
 import solitaire.presentation.P4TasColoree;
 import solitaire.presentation.P7Colonne;
-import solitaire.presentation.PSabot;
 import solitaire.presentation.PSolitaire;
 
 public class CSolitaire extends Solitaire
@@ -27,27 +28,42 @@ public class CSolitaire extends Solitaire
 
     public void init()
     {
-        cSabot = (CSabot) sabot;
-
-        CColonne[] tab = new CColonne[7];
-
-        for ( int i = 0; i < pilesAlternees.length; i++ )
-        {
-            tab[i] = (CColonne) pilesAlternees[i];
-        }
-
-        colonnes = new P7Colonne( tab );
-
+        /*
+         * ------tas de carte colorée----
+         */       
         CTasDeCarteColorees[] tabColore = new CTasDeCarteColorees[4];
-        
         for ( int i = 0; i < pilesColorees.length; i++ )
         {
             CTasDeCarteColorees tmp = (CTasDeCarteColorees) (pilesColorees[i]);
             tabColore[i] = tmp;
-        }
-        
+        }        
         this.tasColorees = new P4TasColoree( tabColore );
+        
+        
+        /*
+         * ------Commande pour le double clic----
+         */
+        ICommand command = new DoubleClickCommand( tabColore );
+        
+        
+        /*
+         * ------Colonnes----
+         */
+        CColonne[] tab = new CColonne[7];
+        for ( int i = 0; i < pilesAlternees.length; i++ )
+        {
+            tab[i] = (CColonne) pilesAlternees[i];
+            tab[i].setDoubleClickCommand( command );
+        }
+        colonnes = new P7Colonne( tab );
 
+        
+        /*
+         * ------Sabot----
+         */
+        cSabot = (CSabot) sabot;
+        cSabot.setDoubleClickCommand( command );
+        
         p.init();
     }
 
