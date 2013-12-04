@@ -22,25 +22,27 @@ public class PSabot extends ADnD
 
     public PSabot( CSabot s )
     {
-        controlleur = s;
+        //---INIT SWING----
         this.reserve = s.getTasCache().getPresentation();
         this.visible = s.getTasVisible().getPresentation();
-        composantContainDragger = this.visible;
         add( reserve );
         add( visible );
         reserve.setFond( Toolkit.getDefaultToolkit().createImage(".\\ressources\\reserve.jpg"));
         setVisible( true );
-        //setLayout( null );
         visible.setXoffset( 30 );
         visible.setLocation( PCarte.largeur + 20, 0 );
+        setBackground(new Color(13, 131, 53)); // vert
         
+        //---INIT classe parent ---
+        controlleur = s;       
+        composantContainDragger = this.visible;               
         reserve.addMouseListener( new RetournerCarteSabot() );
         visible.addMouseListener( new DoubleClickCarte() );
         myDragSourceListener = new MyDragSourceListener();
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer( visible, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
         dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );
-        setBackground(new Color(13, 131, 53)); // vert
+
     }
    
     public class DoubleClickCarte extends ClickListener
@@ -53,7 +55,7 @@ public class PSabot extends ADnD
              
               if(selectedCarte != null)
               {
-                  controlleur.callDoubleClickCommand( ((PTasDeCarte)selectedCarte.getParent()).getControleur() );                  
+                  controlleur.p2c_callDoubleClickCommand( ((PTasDeCarte)selectedCarte.getParent()).getControleur() );                  
               }
           }
         }

@@ -1,6 +1,7 @@
 package solitaire.controleur;
 
-import java.awt.Component;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 
@@ -8,19 +9,22 @@ import solitaire.DnD.IControleurDnD;
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesColorees;
 import solitaire.application.Usine;
-import solitaire.presentation.*;
+import solitaire.observer.Observable;
+import solitaire.observer.Observer;
+import solitaire.presentation.PTasDeCarteColoree;
 import solitaire.usine.CUsine;
 
-public class CTasDeCarteColorees extends TasDeCartesColorees implements IControleurDnD
+public class CTasDeCarteColorees extends TasDeCartesColorees implements IControleurDnD, Observable
 {
     private PTasDeCarteColoree p;
-
+   
     private CTasDeCarte tas;
+    private List<Observer> listObserver;
 
     public CTasDeCarteColorees( String nom, int couleur, Usine usine )
     {
         super( nom, couleur, usine );
-
+        listObserver = new ArrayList<Observer>();
         p = new PTasDeCarteColoree( this );
     }
 
@@ -30,14 +34,20 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
         {
             super.empiler( c );
             p.empiler( ( (CCarte) c ).getPresentation() );
+            notifyObservers();
         }
         else
             System.out.println("impossible d'empiler sur le tas de carte coloree");
     }
     
+    public void registerObserver(Observer observer)
+    {
+        listObserver.add( observer );
+    }
+    
     @Override
-    public void callDoubleClickCommand( Object carte )
-    {// rien car déjà en place
+    public void p2c_callDoubleClickCommand( Object carte )
+    {// rien car la carte est déjà à sa place finale
     }
    
     
@@ -123,7 +133,7 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
     }
 
     @Override
-    public void p2c_finDnDDrag( CTasDeCarte tas, boolean dropSuccess )
+    public void p2c_finDnD4DragSource( CTasDeCarte tas, boolean dropSuccess )
     {
         if(!dropSuccess)
         {              
@@ -149,7 +159,7 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
     }
 
     @Override
-    public void finDnDDrop( CTasDeCarte tas )
+    public void p2c_finDnD4DropTarget( CTasDeCarte tas )
     {
         try
         {
@@ -169,6 +179,25 @@ public class CTasDeCarteColorees extends TasDeCartesColorees implements IControl
             e.printStackTrace();
         }
 
+    }
+
+    @Override
+    public void addObserver( solitaire.observer.Observer o )
+    {
+       listObserver.add( o );
+    }
+
+    @Override
+    public void deleteObserver( solitaire.observer.Observer o )
+    {
+      listObserver.remove( o );
+    }
+
+    @Override
+    public void notifyObservers()
+    {
+       for(Observer o : listObserver)
+           o.notifie();
     }
 
   

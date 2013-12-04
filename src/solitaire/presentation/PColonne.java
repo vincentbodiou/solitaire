@@ -22,31 +22,38 @@ public class PColonne extends ADnD
     private PTasDeCarte tasCachee;
 
     public PColonne( CColonne c )
-    {
-        controlleur = c;
+    { 
         
+        //----INIT SWING----/
         setLayout( new GridLayout( 0, 1 ) );
-        tasVisible = (PTasDeCarteAlterne) ( (CColonne) controlleur ).getTasVisible().getPresentation();
-        tasCachee = (PTasDeCarte) ( (CColonne) controlleur ).getTasCachee().getPresentation();
-        composantContainDragger = tasVisible;
+        tasVisible = (PTasDeCarteAlterne) c.getTasVisible().getPresentation();
+        tasCachee = (PTasDeCarte) c.getTasCachee().getPresentation();
         add( tasCachee );
         add( tasVisible );
         tasCachee.setBackground(new Color(13, 131, 53)); // vert
-        tasVisible.setBackground(new Color(13, 131, 53)); // vert
-        dropTarget = new DropTarget( this, new MyDropTargetListener() );
-        myDragSourceListener = new MyDragSourceListener();
-        dragSource = new DragSource();
-        dragSource.createDefaultDragGestureRecognizer( tasVisible, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
-        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );
+        tasVisible.setBackground(new Color(13, 131, 53)); // vert       
         setPreferredSize( getSize() );
         setSize( getSize() );
         setVisible( true );
         setBackground(new Color(13, 131, 53)); // vert
+        
+        //----INIT Classe parent de DnD----/
+        controlleur = c;
+        composantContainDragger = tasVisible;     
+        dropTarget = new DropTarget( this, new MyDropTargetListener() );
+        myDragSourceListener = new MyDragSourceListener();
+        dragSource = new DragSource();
+        dragSource.createDefaultDragGestureRecognizer( tasVisible, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
+        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );        
         tasCachee.addMouseListener( new RetournerCarteColonne() );
         tasCachee.setFond( Toolkit.getDefaultToolkit().createImage(".\\ressources\\cartevide.png"));
         tasVisible.addMouseListener( new DoubleClickCarte() );
+
+        
     }
     
+    
+    //on signale au controleur CColonne que l'on a un double clic sur le tas visible
     public class DoubleClickCarte extends ClickListener
     {
         @Override
@@ -57,7 +64,7 @@ public class PColonne extends ADnD
              
               if(selectedCarte != null)
               {
-                  controlleur.callDoubleClickCommand( ((PTasDeCarteAlterne)selectedCarte.getParent()).getControleur() );                  
+                  controlleur.p2c_callDoubleClickCommand( ((PTasDeCarteAlterne)selectedCarte.getParent()).getControleur() );                  
               }
           }
         }

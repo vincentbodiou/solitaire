@@ -7,6 +7,7 @@ import solitaire.application.Sabot;
 import solitaire.application.Usine;
 import solitaire.command.ICommand;
 import solitaire.command.IDoubleClick;
+import solitaire.player.Player;
 import solitaire.presentation.PSabot;
 import solitaire.usine.CUsine;
 
@@ -36,6 +37,38 @@ public class CSabot extends Sabot implements IControleurDnD, IDoubleClick
         
     }
 
+    /*
+     * On set la commande associé au double clic
+     */
+    @Override
+    public void setDoubleClickCommand( ICommand cmd )
+    {
+        command = cmd;
+    }
+
+    /*
+     * la presentation a détecter un double clic sur son tas de carte visible du sabot
+     * donc le controleur de CSabot récupère la carte au sommet et execute sa commande
+     */
+    @Override
+    public void p2c_callDoubleClickCommand( Object tasDeCarte )
+    {        
+        try
+        {
+            CTasDeCarte tas = (CTasDeCarte) tasDeCarte;
+            CCarte c = (CCarte) tas.getSommet() ;
+
+            if(command.execute( c ))
+            {
+                tasVisible.depiler();
+            }
+        }
+        catch ( Exception e )
+        {
+            e.printStackTrace();
+        }            
+    }
+    
     public void retournerCarte() throws Exception
     {
         System.out.println( "retournerCarte de Csabot" );
@@ -54,10 +87,15 @@ public class CSabot extends Sabot implements IControleurDnD, IDoubleClick
         }
     }
     
+    /*
+     * Logique du sabot quand un DnD commence
+     */
     @Override
     public void p2c_debutDnDDrag( CCarte carte )
     {
+        // on va mettre ds ce tas la carte au sommet du tas visible du sabot
         CTasDeCarte tas = new CTasDeCarte( "temp", new CUsine() );
+        
         if(carte != null)
         {
             try
@@ -81,31 +119,39 @@ public class CSabot extends Sabot implements IControleurDnD, IDoubleClick
     
     
     @Override
-    public void p2c_finDnDDrag( CTasDeCarte tas, boolean dropSuccess )
+    public void p2c_finDnD4DragSource( CTasDeCarte tas, boolean dropSuccess )
     {
+        //si le drop n'est pas autorisé, alors on rempile le tas de carte en DnD dans le tas de 
+        //carte visibles du sabot
         if(!dropSuccess)
+        {
             empiler(tas);
+            Player.playSoundErreur();
+        }  
+
     }
     
+    /*
+     * rien car on est pas sensé survolé le sabot : on pourrait ajouter ici une couleur de background .... 
+     */
     @Override
     public void p2c_DragEnter( CTasDeCarte tas )
-    {
-        // TODO Auto-generated method stub
-        
+    {         
     }
     
+    /*
+     * rien car on est pas sensé survolé le sabot : on pourrait ajouter ici une couleur de background .... 
+     */
     @Override
     public void p2c_DragExit( CTasDeCarte controleur )
-    {
-        // TODO Auto-generated method stub
-        
+    {        
     }
-
+    /*
+     * rien car on est pas sensé "dropper" dans le sabot : : on pourrait ajouter ici une couleur de background .... 
+     */
     @Override
-    public void finDnDDrop( CTasDeCarte tas )
-    {
-        // TODO Auto-generated method stub
-        
+    public void p2c_finDnD4DropTarget( CTasDeCarte tas )
+    {        
     }
 
     public CTasDeCarte getTasVisible()
@@ -170,29 +216,5 @@ public class CSabot extends Sabot implements IControleurDnD, IDoubleClick
 
     }
 
-    @Override
-    public void setDoubleClickCommand( ICommand cmd )
-    {
-        command = cmd;
-    }
-
-    @Override
-    public void callDoubleClickCommand( Object tasDeCarte )
-    {        
-        try
-        {
-            CTasDeCarte tas = (CTasDeCarte) tasDeCarte;
-            CCarte c = (CCarte) tas.getSommet() ;
-
-            if(command.execute( c ))
-            {
-                tasVisible.depiler();
-            }
-        }
-        catch ( Exception e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }            
-    }
+   
 }

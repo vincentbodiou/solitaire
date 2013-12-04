@@ -1,11 +1,9 @@
 package solitaire.controleur;
 
 import javax.swing.JFrame;
-
 import solitaire.application.Carte;
 import solitaire.application.TasDeCartesAlternees;
 import solitaire.application.Usine;
-import solitaire.presentation.PTasDeCarte;
 import solitaire.presentation.PTasDeCarteAlterne;
 import solitaire.usine.CUsine;
 

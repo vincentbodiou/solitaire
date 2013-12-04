@@ -1,6 +1,5 @@
 package solitaire.controleur;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
@@ -21,6 +20,7 @@ public class CTasDeCarte extends TasDeCartes
         p = new PTasDeCarte( nom, usine, this );
     }
 
+    
     @Override
     public void empiler( Carte c )
     {

@@ -6,11 +6,11 @@ import solitaire.controleur.CTasDeCarteAlterne;
 
 public interface IControleurDnD
 {
-    public abstract void p2c_debutDnDDrag( CCarte carte );
-    public abstract void p2c_finDnDDrag( CTasDeCarte tasTemp, boolean dropSuccess );
-    public abstract void p2c_DragEnter( CTasDeCarte tas );
-    public abstract void finDnDDrop( CTasDeCarte tas );
-    public abstract void p2c_DragExit( CTasDeCarte controleur );
-    public abstract void callDoubleClickCommand(Object tas);
+    public void p2c_debutDnDDrag( CCarte carte );
+    public void p2c_finDnD4DragSource( CTasDeCarte tasTemp, boolean dropSuccess );
+    public void p2c_DragEnter( CTasDeCarte tas );
+    public void p2c_finDnD4DropTarget( CTasDeCarte tas );
+    public void p2c_DragExit( CTasDeCarte controleur );
+    public void p2c_callDoubleClickCommand(Object tas);
 }
 

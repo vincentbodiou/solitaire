@@ -3,6 +3,19 @@ package solitaire.command;
 import solitaire.controleur.CCarte;
 import solitaire.controleur.CTasDeCarteColorees;
 
+/*
+ * Concrete Commande pour le double clic
+ * La méthode execute va avoir pour but d'appeller le controleur 
+ * du tas de carte colorée correspondant à la couleur de la carte en paramètre
+ * et d'empiler si possible cette carte. 
+ * 
+ * @param du contrusteur : les controleurs des 4 tas de cartes colorées
+ * 
+ * @param de execute() : Controleur de la carte que l'on veut empiler
+ * 
+ * @return true si la carte est empiler
+ */
+
 public class DoubleClickCommand implements ICommand
 {
     private CTasDeCarteColorees[] tabColore;
@@ -21,29 +34,5 @@ public class DoubleClickCommand implements ICommand
            tabColore[carte.getCouleur()-1].empiler( carte );
        
        return true;
-//        switch ( carte.getCouleur() )
-//        {
-//        case 1:
-//            if ( tabColore[0].isEmpilable( carte ) ) return false;
-//                tabColore[0].empiler( carte );
-//            ;
-//            break; // Carreau
-//        case 2:
-//            if ( tabColore[1].isEmpilable( carte ) ) return false;
-//            tabColore[1].empiler( carte );
-//            ;
-//            break; // Pique
-//        case 3:
-//            if ( tabColore[2].isEmpilable( carte ) ) return false;
-//            tabColore[2].empiler( carte );
-//            ;
-//            break; // Coeur
-//        case 4:
-//            if ( tabColore[3].isEmpilable( carte ) ) return false;
-//            tabColore[3].empiler( carte );
-//            ;
-//            break; // Club
-//        }
-//        
     }
 }

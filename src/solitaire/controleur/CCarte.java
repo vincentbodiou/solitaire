@@ -27,12 +27,7 @@ public class CCarte extends Carte{
     {
         return (PCarte) p;
     }
-    
-    public void doubleclick()
-    {
-        
-    }
-    
+       
     /**
 	 * Test d'affichage d'une carte
 	 * @param args
