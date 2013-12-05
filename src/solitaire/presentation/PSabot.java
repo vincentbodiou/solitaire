@@ -1,6 +1,7 @@
 package solitaire.presentation;
 
 import java.awt.Color;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
@@ -27,7 +28,8 @@ public class PSabot extends ADnD
         this.visible = s.getTasVisible().getPresentation();
         add( reserve );
         add( visible );
-        reserve.setFond( Toolkit.getDefaultToolkit().createImage(".\\ressources\\reserve.jpg"));
+        Image fond = Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource("reserve.jpg"));
+        reserve.setFond( fond );
         setVisible( true );
         visible.setXoffset( 30 );
         visible.setLocation( PCarte.largeur + 20, 0 );

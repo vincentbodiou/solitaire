@@ -1,6 +1,9 @@
 package solitaire.player;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -13,31 +16,33 @@ public class Player
           public void run() {
               
             try {
-              Clip clip = AudioSystem.getClip();
-              File soundFile = new File("ressources\\sonVictoire.wav");
-              AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-              clip.open(audioIn);
-              clip.start(); 
+                Clip clip = AudioSystem.getClip();
+                InputStream audioSrc = getClass().getResourceAsStream("/sonVictoire.wav");
+                InputStream bufferedIn = new BufferedInputStream(audioSrc);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                clip.open(audioStream);
+                clip.start(); 
             } catch (Exception e) {
-              System.err.println(e.getMessage());
+                System.err.println("\n erreur avec le son sonVictoire.wav. " + e.getMessage());
             }
           }
         }).start();
       }
 
-    public static void playSoundErreur()
+    public static synchronized void playSoundErreur()
     {
         new Thread(new Runnable() {
             public void run() {
                 
               try {
                 Clip clip = AudioSystem.getClip();
-                File soundFile = new File("ressources\\erreur.wav");
-                AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
-                clip.open(audioIn);
+                InputStream audioSrc = getClass().getResourceAsStream("/erreur.wav");
+                InputStream bufferedIn = new BufferedInputStream(audioSrc);
+                AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
+                clip.open(audioStream);
                 clip.start(); 
               } catch (Exception e) {
-                System.err.println(e.getMessage());
+                System.err.println("\n erreur avec le son erreur.wav. " + e.getMessage());
               }
             }
           }).start();

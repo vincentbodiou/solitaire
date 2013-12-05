@@ -10,8 +10,8 @@ public class launcher
     {
         Usine usine = new CUsine();
         CSolitaire solitaire = new CSolitaire( "solitaire", usine );
-        solitaire.initialiser();
-        solitaire.init();
+        solitaire.initialiser(); // init le modèle
+        solitaire.init(); // init la présentation
         solitaire.run();
     }
 }

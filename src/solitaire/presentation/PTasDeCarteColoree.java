@@ -62,8 +62,8 @@ public class PTasDeCarteColoree extends ADnD
         case 4 : path = "trefle" ;break;
         }
         path+=".png";
-       
-        fond = Toolkit.getDefaultToolkit().createImage(".\\ressources\\"+path);
+        
+        fond = Toolkit.getDefaultToolkit().createImage(ClassLoader.getSystemResource(path));
         
         setSize( PCarte.largeur, PCarte.hauteur );
         setPreferredSize( getSize() );

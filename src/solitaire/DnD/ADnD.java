@@ -34,26 +34,34 @@ import solitaire.presentation.PTasDeCarte;
 public abstract class ADnD extends JPanel
 {
     protected DropTarget dropTarget;
+
     protected DropTargetDropEvent theFinalEvent;
-    
+
     protected DragSource dragSource = null;
+
     protected MyDragSourceListener myDragSourceListener = null;
-    //origine du drag
+
+    // origine du drag
     protected Point dragOrigin = null;
-    
+
     protected DragGestureEvent theInitialEvent = null;
+
     protected PCarte selected;
+
     protected CCarte selectedControl;
-    
+
     protected PTasDeCarte Tastemporaire;
-    //frame qui va contenir le tas de carte en cours de DnD
+
+    // frame qui va contenir le tas de carte en cours de DnD
     protected JFrame dragFrame = null;
-    //le controleur associé au drag
+
+    // le controleur associé au drag
     protected IControleurDnD controlleur;
-    //le composant graphique sur lequel on va démarré le DnD
+
+    // le composant graphique sur lequel on va démarré le DnD
     protected JPanel composantContainDragger;
-    
-    //class détectant le début d'un DND
+
+    // class détectant le début d'un DND
     protected class MyDragGestureListener implements DragGestureListener
     {
         public MyDragGestureListener()
@@ -61,7 +69,7 @@ public abstract class ADnD extends JPanel
         }
 
         /*
-         * début DND 
+         * début DND
          */
         @Override
         public void dragGestureRecognized( DragGestureEvent dge )
@@ -72,14 +80,18 @@ public abstract class ADnD extends JPanel
             dragOrigin = dge.getDragOrigin(); // Point de départ du drag
             try
             { // on récupère la PCarte associé au drag
-                selected = (PCarte) composantContainDragger.getComponentAt( dragOrigin );
-                selectedControl = selected.getControleur();
+                if ( composantContainDragger != null )
+                {
+                    selected = (PCarte) composantContainDragger.getComponentAt( dragOrigin );
+                    selectedControl = selected.getControleur();
+                }
             }
             catch ( Exception e )
             {
-                e.printStackTrace();
+                //pas très beau mais pas envie de polluer la console
             }
-            //on prévient le controleur de la classe dérivé d'un début de Drag sur la carte selectedControl
+            // on prévient le controleur de la classe dérivé d'un début de Drag
+            // sur la carte selectedControl
             if ( controlleur != null )
                 controlleur.p2c_debutDnDDrag( selectedControl );
         }
@@ -91,7 +103,7 @@ public abstract class ADnD extends JPanel
         {
         }
 
-        //on signale au controleur du drop
+        // on signale au controleur du drop
         @Override
         public void dragDropEnd( DragSourceDropEvent event )
         {
@@ -103,11 +115,11 @@ public abstract class ADnD extends JPanel
         @Override
         public void dragEnter( DragSourceDragEvent evt )
         {
-            evt.getDragSourceContext().setCursor( new Cursor( Cursor.MOVE_CURSOR ));
+            evt.getDragSourceContext().setCursor( new Cursor( Cursor.MOVE_CURSOR ) );
         }
     }
 
-    //Quand on est en cours de DnD on déplace la frame avec la souris
+    // Quand on est en cours de DnD on déplace la frame avec la souris
     protected class MyDragSourceMotionListener implements DragSourceMotionListener
     {
 
@@ -118,8 +130,7 @@ public abstract class ADnD extends JPanel
         @Override
         public void dragMouseMoved( DragSourceDragEvent event )
         {
-            dragFrame.setLocation (event.getX () - getRootPane ().getParent ().getLocationOnScreen ().x+5,
-                                   event.getY () - getRootPane ().getParent ().getLocationOnScreen ().y+5) ;
+            dragFrame.setLocation( event.getX() - getRootPane().getParent().getLocationOnScreen().x + 5, event.getY() - getRootPane().getParent().getLocationOnScreen().y + 5 );
             repaint();
         }
     }
@@ -159,7 +170,8 @@ public abstract class ADnD extends JPanel
             controlleur.p2c_DragExit( pTas.getControleur() );
         }
 
-        @Override //on drop le tas de carte
+        @Override
+        // on drop le tas de carte
         public void drop( DropTargetDropEvent dtde )
         {
             theFinalEvent = dtde;
@@ -167,7 +179,8 @@ public abstract class ADnD extends JPanel
         }
     }
 
-    //Drag valide donc on met le tas de carte tmp dans une frame qu'on baladera en glisser déposer
+    // Drag valide donc on met le tas de carte tmp dans une frame qu'on baladera
+    // en glisser déposer
     public void c2p_debutDnDValide( PTasDeCarte tmp )
     {
         Tastemporaire = tmp;
@@ -205,20 +218,20 @@ public abstract class ADnD extends JPanel
     }
 
     public void color_isEmpilable()
-    {        
-        setCursor( new Cursor( Cursor.HAND_CURSOR ));
+    {
+        setCursor( new Cursor( Cursor.HAND_CURSOR ) );
         composantContainDragger.setBackground( Color.green );
     }
 
     public void color_resetColor()
     {
-        setCursor( new Cursor( Cursor.DEFAULT_CURSOR ));
+        setCursor( new Cursor( Cursor.DEFAULT_CURSOR ) );
         composantContainDragger.setBackground( new Color( 13, 131, 53 ) ); // vert
     }
 
     public void color_isNotEmpilable()
     {
-        setCursor( new Cursor( Cursor.CROSSHAIR_CURSOR));
+        setCursor( new Cursor( Cursor.CROSSHAIR_CURSOR ) );
         composantContainDragger.setBackground( Color.red );
     }
 
