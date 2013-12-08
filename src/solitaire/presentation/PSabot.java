@@ -60,6 +60,7 @@ public class PSabot extends ADnD
                   controlleur.p2c_callDoubleClickCommand( ((PTasDeCarte)selectedCarte.getParent()).getControleur() );                  
               }
           }
+          repaint();
         }
     } 
     

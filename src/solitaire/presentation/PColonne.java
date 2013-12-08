@@ -1,6 +1,7 @@
 package solitaire.presentation;
 
 //rendu au drag Enter
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
@@ -25,11 +26,11 @@ public class PColonne extends ADnD
     { 
         
         //----INIT SWING----/
-        setLayout( new GridLayout( 0, 1 ) );
+        setLayout( new BorderLayout( 0, 1 ) );
         tasVisible = (PTasDeCarteAlterne) c.getTasVisible().getPresentation();
         tasCachee = (PTasDeCarte) c.getTasCachee().getPresentation();
-        add( tasCachee );
-        add( tasVisible );
+        add( tasCachee, BorderLayout.NORTH );
+        add( tasVisible, BorderLayout.CENTER );
         tasCachee.setBackground(new Color(13, 131, 53)); // vert
         tasVisible.setBackground(new Color(13, 131, 53)); // vert       
         setPreferredSize( getSize() );
@@ -79,13 +80,13 @@ public class PColonne extends ADnD
             try
             {
                 ((CColonne)controlleur).retournerCarte();
-                repaint();
-                
+                               
             }
             catch ( Exception e1 )
             {
                 e1.printStackTrace();
             }
+            
         }
     }     
 

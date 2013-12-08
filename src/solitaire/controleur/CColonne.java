@@ -75,6 +75,7 @@ public class CColonne extends Colonne implements IControleurDnD, IDoubleClick
         System.out.println( "retournerCarte de CColonne" );
         if ( isCarteRetournable() )
             super.retournerCarte();
+        p.repaint();
     }
 
     @Override

@@ -13,6 +13,7 @@ import java.awt.dnd.DragGestureEvent;
 import java.awt.dnd.DragGestureListener;
 import java.awt.dnd.DragSource;
 import java.awt.dnd.DragSourceDropEvent;
+import java.awt.dnd.DragSourceMotionListener;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -53,7 +54,10 @@ public class PTasDeCarteColoree extends ADnD
         dragSource = new DragSource();
         dragSource.createDefaultDragGestureRecognizer( this, DnDConstants.ACTION_MOVE, new MyDragGestureListener() );
         dropTarget = new DropTarget(this, new MyDropTargetListener());
-       
+        composantContainDragger = this;
+        dragSource.addDragSourceMotionListener( new MyDragSourceMotionListener() );
+             
+        
         String path="";
         switch (c.getCouleur()) {       
         case 1 : path = "carreau" ;break;
