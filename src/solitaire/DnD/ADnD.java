@@ -128,9 +128,13 @@ public abstract class ADnD extends JPanel
         }
 
         @Override
-        public void dragMouseMoved( DragSourceDragEvent event )
-        {
-            dragFrame.setLocation( event.getX() - getRootPane().getParent().getLocationOnScreen().x + 5, event.getY() - getRootPane().getParent().getLocationOnScreen().y + 5 );
+        public void dragMouseMoved( DragSourceDragEvent evt )
+        {  
+            int parentX = getRootPane().getX();
+            int parentY = getRootPane().getY();
+            int eventX = evt.getLocation().x + 15;
+            int eventY = evt.getLocation().y - 1;
+            dragFrame.setLocation( eventX - parentX, eventY - parentY );
             repaint();
         }
     }
@@ -220,18 +224,21 @@ public abstract class ADnD extends JPanel
     public void color_isEmpilable()
     {
         setCursor( new Cursor( Cursor.HAND_CURSOR ) );
+        if(composantContainDragger!=null)
         composantContainDragger.setBackground( Color.green );
     }
 
     public void color_resetColor()
     {
         setCursor( new Cursor( Cursor.DEFAULT_CURSOR ) );
+        if(composantContainDragger!=null)
         composantContainDragger.setBackground( new Color( 13, 131, 53 ) ); // vert
     }
 
     public void color_isNotEmpilable()
     {
         setCursor( new Cursor( Cursor.CROSSHAIR_CURSOR ) );
+        if(composantContainDragger!=null)
         composantContainDragger.setBackground( Color.red );
     }
 

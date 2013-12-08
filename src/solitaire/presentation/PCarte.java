@@ -74,9 +74,6 @@ public class PCarte extends JPanel implements Transferable{
 	dos.setVisible(!faceVisible);
     }
 
-    //public final CCarte getControle () {
-    //return (controle) ;
-    //}
 
     public ImageIcon getIcone () {
 	return icone ;
@@ -86,7 +83,7 @@ public class PCarte extends JPanel implements Transferable{
        initialiser l'image du dos et les dimensions d'une PCarte
     */
     static {
-	iconeDos = new ImageIcon(ClassLoader.getSystemResource("dos.jpg")) ;
+	iconeDos = new ImageIcon(ClassLoader.getSystemResource("dosRB.jpg")) ;
 	largeur = iconeDos.getIconWidth () + 4;
 	hauteur = iconeDos.getIconHeight () + 4;
     }
